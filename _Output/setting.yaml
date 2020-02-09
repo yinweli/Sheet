@@ -1,0 +1,13 @@
+---
+global:
+    excelPath: Excel
+    outputPathJson: Json
+    outputPathCs: Reader
+    outputPathCpp: Reader
+    cppLibraryPath: nlohmann
+    
+elements:
+    - excelName: Terrain.xlsx
+      sheetName: Data
+      elementName: TerrainData
+...

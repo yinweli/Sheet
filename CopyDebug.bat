@@ -1,0 +1,1 @@
+call _Batch\Copy.bat Debug
