@@ -1,4 +1,4 @@
-// generation time=2020-02-09 22:55:29
+// generation time=2020-02-10 21:36:36
 // use nlohmann's json library
 // github: https://github.com/nlohmann/json
 
@@ -27,14 +27,14 @@ struct TerrainData {
     std::vector<std::string> testText; // 測試字串(text)
 };
 
-inline json get_untyped(const json& j, const char* property)
-{
-    return j.find(property) != j.end() ? j.at(property).get<json>() : json();
-}
-
 inline std::string get_filename()
 {
     return "TerrainData.json";
+}
+
+inline json get_untyped(const json& j, const char* property)
+{
+    return j.find(property) != j.end() ? j.at(property).get<json>() : json();
 }
 } // namespace StaticData
 

@@ -92,14 +92,14 @@ struct {2} {{
 {3}
 }};
 
-inline json get_untyped(const json& j, const char* property)
-{{
-    return j.find(property) != j.end() ? j.at(property).get<json>() : json();
-}}
-
 inline std::string get_filename()
 {{
     return ""{4}"";
+}}
+
+inline json get_untyped(const json& j, const char* property)
+{{
+    return j.find(property) != j.end() ? j.at(property).get<json>() : json();
 }}
 }} // namespace StaticData
 

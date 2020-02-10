@@ -32,22 +32,47 @@ namespace UnitTestReaderCs
 
         [TestMethod]
         public void TestFilenameEmpty() {
+            var reader = new Reader<TerrainData>() { filename = null, delegateLoad = LoadJson, delegatePkey = ToPKey };
+            var result = false;
+
+            try {
+                reader.Initialize();
+            }
+            catch (ExceptionFileName e) {
+                result = true;
+            }
+
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void TestDelegateLoadNull() {
+            var reader = new Reader<TerrainData>() { filename = TerrainData.filename, delegateLoad = null, delegatePkey = ToPKey };
+            var result = false;
+
+            try {
+                reader.Initialize();
+            }
+            catch (ExceptionDelegateLoad e) {
+                result = true;
+            }
+
+            Assert.IsTrue(result);
         }
 
         [TestMethod]
         public void TestDelegatePKeyNull() {
-        }
+            var reader = new Reader<TerrainData>() { filename = TerrainData.filename, delegateLoad = LoadJson, delegatePkey = null };
+            var result = false;
 
-        [TestMethod]
-        public void TestDeserializeFailed() {
-        }
+            try {
+                reader.Initialize();
+            }
+            catch (ExceptionDelegatePKey e) {
+                result = true;
+            }
 
-        [TestMethod]
-        public void TestDuplicatePKey() {
+            Assert.IsTrue(result);
         }
 
         public TestContext TestContext {
@@ -55,7 +80,7 @@ namespace UnitTestReaderCs
         }
 
         private List<string> LoadJson(string filename) {
-            var filepath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "_Output", "Json", filename);
+            var filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..", "_Output", "Json", filename);
             var file = File.ReadAllLines(filepath);
 
             return new List<string>(file);

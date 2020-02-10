@@ -1,7 +1,6 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace StaticData
 {
@@ -35,24 +34,24 @@ namespace StaticData
         /// </summary>
         public void Initialize() {
             if (filename == null || filename.Length <= 0)
-                throw new InitializeException<T>("filename empty");
+                throw new ExceptionFileName(typeof(T).Name);
 
             if (delegateLoad == null)
-                throw new InitializeException<T>("delegate load null");
+                throw new ExceptionDelegateLoad(typeof(T).Name);
 
             if (delegatePkey == null)
-                throw new InitializeException<T>("delegate pkey null");
+                throw new ExceptionDelegatePKey(typeof(T).Name);
 
             vaults.Clear();
 
             var datas = delegateLoad(filename);
-            var exceptions = new Dictionary<int, string>();
+            var errors = new Dictionary<int, string>();
 
             for (var itor = 0; itor < datas.Count; ++itor) {
                 var data = JsonConvert.DeserializeObject<T>(datas[itor]);
 
                 if (data == null) {
-                    exceptions.Add(itor, "deserialize failed");
+                    errors.Add(itor, "deserialize failed");
                     continue;
                 }//if
 
@@ -62,12 +61,12 @@ namespace StaticData
                     vaults.Add(pkey, data);
                 }
                 catch (ArgumentException) {
-                    exceptions.Add(itor, "duplicate pkey");
+                    errors.Add(itor, "duplicate pkey");
                 }
             }//for
 
-            if (exceptions.Count > 0)
-                throw new InitializeException<T>(exceptions);
+            if (errors.Count > 0)
+                throw new ExceptionData(typeof(T).Name, errors);
         }
 
         /// <summary>
@@ -152,63 +151,47 @@ namespace StaticData
     }
 
     /// <summary>
-    /// 初始化異常
+    /// 異常: 檔名為空
     /// </summary>
-    /// <typeparam name="T">靜態資料型態</typeparam>
-    public class InitializeException<T> : Exception
+    public class ExceptionFileName : Exception
     {
-        /// <summary>
-        /// 取得錯誤訊息
-        /// </summary>
-        /// <param name="message">錯誤訊息</param>
-        /// <returns>錯誤訊息</returns>
-        private static string GetErrorMessage(string message) {
-            StringBuilder error = new StringBuilder();
-
-            error.Append("{ ");
-            error.Append("type=" + typeof(T).Name + ", ");
-            error.Append("error=" + message + ", ");
-            error.Append(" }");
-
-            return error.ToString();
+        /// <param name="type">類型字串</param>
+        public ExceptionFileName(string type)
+            : base("filename empty, type=" + type) {
         }
+    }
 
-        /// <summary>
-        /// 取得錯誤訊息
-        /// </summary>
-        /// <param name="messages">錯誤列表</param>
-        /// <returns>錯誤訊息</returns>
-        private static string GetErrorMessage(Dictionary<int, string> messages) {
-            StringBuilder error = new StringBuilder();
-
-            error.Append("{ ");
-            error.Append("type=" + typeof(T).Name + ", ");
-
-            foreach (var itor in messages)
-                error.Append("error=[line " + itor.Key + "] " + itor.Value + ", ");
-
-            error.Append(" }");
-
-            return error.ToString();
+    /// <summary>
+    /// 異常: 讀取靜態資料接口為空
+    /// </summary>
+    public class ExceptionDelegateLoad : Exception
+    {
+        /// <param name="type">類型字串</param>
+        public ExceptionDelegateLoad(string type)
+            : base("delegate load null, type=" + type) {
         }
+    }
 
-        public InitializeException() {
+    /// <summary>
+    /// 異常: 取得靜態資料索引接口為空
+    /// </summary>
+    public class ExceptionDelegatePKey : Exception
+    {
+        /// <param name="type">類型字串</param>
+        public ExceptionDelegatePKey(string type)
+            : base("delegate pkey null, type=" + type) {
         }
+    }
 
-        /// <param name="message">錯誤訊息</param>
-        public InitializeException(string message)
-            : base(GetErrorMessage(message)) {
-        }
-
-        /// <param name="messages">錯誤列表</param>
-        public InitializeException(Dictionary<int, string> messages)
-            : base(GetErrorMessage(messages)) {
-        }
-
-        /// <param name="message">錯誤訊息</param>
-        /// <param name="innerException">內部異常</param>
-        public InitializeException(string message, Exception innerException)
-            : base(GetErrorMessage(message), innerException) {
+    /// <summary>
+    /// 異常: 資料失敗
+    /// </summary>
+    public class ExceptionData : Exception
+    {
+        /// <param name="type">類型字串</param>
+        /// <param name="errors">錯誤列表</param>
+        public ExceptionData(string type, Dictionary<int, string> errors)
+            : base("data failed, type=" + type + ", errors=" + errors) {
         }
     }
 }
