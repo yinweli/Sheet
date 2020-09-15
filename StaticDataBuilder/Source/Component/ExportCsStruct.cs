@@ -28,12 +28,10 @@ namespace StaticData {
 using System;
 using System.Collections.Generic;
 
-namespace StaticData
-{{
+namespace StaticData {{
     using pkey = Int64;
 
-    public class {1}
-    {{
+    public class {1} {{
 {2}
 {3}
     }}
