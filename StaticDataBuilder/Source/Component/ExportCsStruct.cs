@@ -2,54 +2,27 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace StaticData
-{
+namespace StaticData {
+
     /// <summary>
     /// 匯出c#版本的資料結構
     /// </summary>
-    public class ExportCsStruct
-    {
-        /// <summary>
-        /// 匯出到c#檔案
-        /// </summary>
-        /// <param name="settingGlobal">全域設定資料</param>
-        /// <param name="settingReader">讀取器設定資料</param>
-        /// <param name="settingElement">項目設定資料</param>
-        /// <param name="import">匯入器</param>
-        /// <returns>true表示成功, false則否</returns>
-        public static bool Export(SettingGlobal settingGlobal, SettingElement settingElement, Import import) {
-            var filepath = Path.Combine(settingGlobal.outputPathCs, settingElement.elementName + EXPORT_EXT);
-            var templateField = new List<string>();
-
-            foreach (var itor in import.GetFields()) {
-                if (itor.fieldType.IsExport())
-                    templateField.Add(string.Format(TEMPLATE_FIELD, itor.fieldType.TypeCs(), itor.name, itor.note));
-            }//for
-
-            var context = string.Format(TEMPLATE_CODE, DateTime.Now, settingElement.elementName,
-                string.Join("\n", templateField),
-                string.Format(TEMPLATE_FILENAME, settingElement.elementName + EXPORT_JSON));
-
-            Directory.CreateDirectory(settingGlobal.outputPathCs);
-            UtilityFile.WriteAllText(filepath, context);
-
-            return true;
-        }
+    public class ExportCsStruct {
 
         /// <summary>
-        /// 匯出副檔名
+        /// 程式檔案的副檔名
         /// </summary>
-        private const string EXPORT_EXT = ".cs";
+        public const string codeExtension = ".cs";
 
         /// <summary>
-        /// 匯出Json檔名
+        /// Json檔案的副檔名
         /// </summary>
-        private const string EXPORT_JSON = ".json";
+        public const string jsonExtension = ".json";
 
         /// <summary>
         /// 程式碼樣板
         /// </summary>
-        private const string TEMPLATE_CODE =
+        public const string codeTemplate =
     @"// generation time={0:yyyy-MM-dd HH:mm:ss}
 
 using System;
@@ -67,13 +40,43 @@ namespace StaticData
 }}";
 
         /// <summary>
-        /// 程式碼樣板: 欄位
-        /// </summary>
-        private const string TEMPLATE_FIELD = @"        public {0} {1}; // {2}";
-
-        /// <summary>
         /// 程式碼樣板: 檔案名稱
         /// </summary>
-        private const string TEMPLATE_FILENAME = @"        public const string filename = ""{0}"";";
+        public const string filenameTemplate = @"        public const string filename = ""{0}"";";
+
+        /// <summary>
+        /// 程式碼樣板: 欄位
+        /// </summary>
+        public const string fieldTemplate = @"        public {0} {1}; // {2}";
+
+        /// <summary>
+        /// 匯出到c#檔案
+        /// </summary>
+        /// <param name="settingGlobal_">全域設定資料</param>
+        /// <param name="settingReader">讀取器設定資料</param>
+        /// <param name="settingElement_">項目設定資料</param>
+        /// <param name="import_">匯入器</param>
+        /// <returns>true表示成功, false則否</returns>
+        public static bool Export(SettingGlobal settingGlobal_, SettingElement settingElement_, Import import_) {
+            var filepath = Path.Combine(settingGlobal_.outputPathCs, settingElement_.elementName + codeExtension);
+            var fields = new List<string>();
+
+            foreach (var itor in import_.GetFields()) {
+                if (itor.fieldType.IsExport())
+                    fields.Add(string.Format(fieldTemplate, itor.fieldType.TypeCs(), itor.name, itor.note));
+            }//for
+
+            var context = string.Format(
+                codeTemplate,
+                DateTime.Now,
+                settingElement_.elementName,
+                string.Format(filenameTemplate, settingElement_.elementName + jsonExtension),
+                string.Join("\n", fields));
+
+            Directory.CreateDirectory(settingGlobal_.outputPathCs);
+            UtilityFile.WriteAllText(filepath, context);
+
+            return true;
+        }
     }
 }

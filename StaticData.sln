@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StaticDataBuilder", "StaticDataBuilder\StaticDataBuilder.csproj", "{8CC0B424-68AF-45E2-BDA9-CC4DE386ED4B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestReaderCs", "UnitTestReaderCs\UnitTestReaderCs.csproj", "{7C933AFC-978F-4A20-9418-46A43A91B67D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{7C933AFC-978F-4A20-9418-46A43A91B67D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StaticDataReader", "StaticDataReader\StaticDataReader.csproj", "{83082C79-585B-4507-80E1-8066FE5D536C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7C933AFC-978F-4A20-9418-46A43A91B67D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C933AFC-978F-4A20-9418-46A43A91B67D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C933AFC-978F-4A20-9418-46A43A91B67D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83082C79-585B-4507-80E1-8066FE5D536C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83082C79-585B-4507-80E1-8066FE5D536C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83082C79-585B-4507-80E1-8066FE5D536C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83082C79-585B-4507-80E1-8066FE5D536C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

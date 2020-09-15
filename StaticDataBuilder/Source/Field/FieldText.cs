@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace StaticData
-{
+namespace StaticData {
+
     /// <summary>
     /// 字串欄位
     /// </summary>
-    public class FieldText : IFieldType
-    {
+    public class FieldText : IFieldType {
+
         public string Type() {
             return "text";
         }
@@ -28,16 +28,15 @@ namespace StaticData
             return false;
         }
 
-        public string WriteJsonObject(JsonWriter jsonWriter, string name, string value) {
-            jsonWriter.WritePropertyName(name);
+        public string WriteJsonObject(JsonWriter jsonWriter_, string name_, string value_) {
+            jsonWriter_.WritePropertyName(name_);
 
             try {
-                jsonWriter.WriteValue(value);
+                jsonWriter_.WriteValue(value_);
 
                 return string.Empty;
-            }
-            catch (Exception e) {
-                jsonWriter.WriteValue(string.Empty);
+            } catch (Exception e) {
+                jsonWriter_.WriteValue(string.Empty);
 
                 return e.Message;
             }

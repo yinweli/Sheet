@@ -1,13 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace StaticData
-{
+namespace StaticData {
+
     /// <summary>
     /// 整數陣列欄位
     /// </summary>
-    public class FieldIntegerArray : IFieldType
-    {
+    public class FieldIntegerArray : IFieldType {
+
         public string Type() {
             return "intArray";
         }
@@ -28,21 +28,20 @@ namespace StaticData
             return false;
         }
 
-        public string WriteJsonObject(JsonWriter jsonWriter, string name, string value) {
-            jsonWriter.WritePropertyName(name);
-            jsonWriter.WriteStartArray();
+        public string WriteJsonObject(JsonWriter jsonWriter_, string name_, string value_) {
+            jsonWriter_.WritePropertyName(name_);
+            jsonWriter_.WriteStartArray();
 
             var result = string.Empty;
 
             try {
-                foreach (string itor in UtilityString.SplitArrayString(value))
-                    jsonWriter.WriteValue(Convert.ToInt32(itor));
-            }
-            catch (Exception e) {
+                foreach (string itor in UtilityString.SplitArrayString(value_))
+                    jsonWriter_.WriteValue(Convert.ToInt32(itor));
+            } catch (Exception e) {
                 result = e.Message;
             }
 
-            jsonWriter.WriteEnd();
+            jsonWriter_.WriteEnd();
 
             return result;
         }

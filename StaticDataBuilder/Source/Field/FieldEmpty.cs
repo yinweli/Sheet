@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 
-namespace StaticData
-{
+namespace StaticData {
+
     /// <summary>
     /// 空欄位
     /// </summary>
-    public class FieldEmpty : IFieldType
-    {
+    public class FieldEmpty : IFieldType {
+
         public string Type() {
             return "empty";
         }
@@ -27,7 +27,7 @@ namespace StaticData
             return false;
         }
 
-        public string WriteJsonObject(JsonWriter jsonWriter, string name, string value) {
+        public string WriteJsonObject(JsonWriter jsonWriter_, string name_, string value_) {
             return string.Empty;
         }
     }

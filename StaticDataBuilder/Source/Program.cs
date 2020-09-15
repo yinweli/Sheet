@@ -4,27 +4,27 @@ using System.IO;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace StaticData
-{
-    internal class Program
-    {
-        private static int Main(string[] args) {
-            return Start(args) ? 0 : 1;
+namespace StaticData {
+
+    internal class Program {
+
+        private static int Main(string[] args_) {
+            return Start(args_) ? 0 : 1;
         }
 
         /// <summary>
         /// 開始建立靜態資料
         /// </summary>
-        /// <param name="args">參數列表</param>
+        /// <param name="args_">參數列表</param>
         /// <returns>true表示成功, false則否</returns>
-        private static bool Start(string[] args) {
+        private static bool Start(string[] args_) {
             using (AutoStopwatch autoStopWatchGlobal = new AutoStopwatch("Static data builder")) {
                 File.Delete(Output.errorLog);
 
-                if (args.Length <= 0)
+                if (args_.Length <= 0)
                     return Output.Error("must specify the setting file path");
 
-                Setting setting = ReadSetting(args[0]);
+                Setting setting = ReadSetting(args_[0]);
 
                 if (setting == null)
                     return Output.Error("setting read failed");
@@ -55,22 +55,21 @@ namespace StaticData
         /// <summary>
         /// 讀取設定檔
         /// </summary>
-        /// <param name="path">設定檔路徑</param>
+        /// <param name="path_">設定檔路徑</param>
         /// <returns>true表示成功, false則否</returns>
-        private static Setting ReadSetting(string path) {
+        private static Setting ReadSetting(string path_) {
             try {
-                if (File.Exists(path) == false) {
+                if (File.Exists(path_) == false) {
                     Output.Error("setting file not exist");
                     return null;
                 }//if
 
                 var deserializer = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
-                var document = File.ReadAllText(path);
+                var document = File.ReadAllText(path_);
                 var input = new StringReader(document);
 
                 return deserializer.Deserialize<Setting>(input);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 Output.Error(e.InnerException.Message);
                 return null;
             }

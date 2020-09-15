@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 
-namespace StaticData
-{
+namespace StaticData {
+
     /// <summary>
     /// 欄位型態介面
     /// </summary>
-    public interface IFieldType
-    {
+    public interface IFieldType {
+
         /// <summary>
         /// 取得欄位型態字串
         /// </summary>
@@ -40,66 +40,66 @@ namespace StaticData
         /// <summary>
         /// 寫入JsonWriter物件
         /// </summary>
-        /// <param name="jsonWriter">JsonWriter物件</param>
-        /// <param name="name">欄位名稱</param>
-        /// <param name="value">欄位字串</param>
+        /// <param name="jsonWriter_">JsonWriter物件</param>
+        /// <param name="name_">欄位名稱</param>
+        /// <param name="value_">欄位字串</param>
         /// <returns>如果是空字串表示成功, 否則是錯誤訊息</returns>
-        string WriteJsonObject(JsonWriter jsonWriter, string name, string value);
+        string WriteJsonObject(JsonWriter jsonWriter_, string name_, string value_);
     }
 
     /// <summary>
     /// 欄位
     /// </summary>
-    public class Field
-    {
+    public class Field {
+
         /// <summary>
         /// 從欄位字串解析欄位物件
         /// </summary>
-        /// <param name="fieldString">欄位字串</param>
+        /// <param name="fieldString_">欄位字串</param>
         /// <returns>欄位物件</returns>
-        public static Field Parse(string fieldString) {
-            string[] parts = UtilityString.SplitFieldString(fieldString);
+        public static Field Parse(string fieldString_) {
+            string[] parts = UtilityString.SplitFieldString(fieldString_);
 
             if (parts.Length >= 2)
-                return new Field() { meta = fieldString, name = parts[0], fieldType = ParseField(parts[1]) };
+                return new Field() { meta = fieldString_, name = parts[0], fieldType = ParseField(parts[1]) };
             else
-                return new Field() { meta = fieldString };
+                return new Field() { meta = fieldString_ };
         }
 
         /// <summary>
         /// 從欄位型態字串解析欄位型態物件
         /// </summary>
-        /// <param name="fieldType">欄位型態字串</param>
+        /// <param name="fieldType_">欄位型態字串</param>
         /// <returns>欄位型態物件</returns>
-        private static IFieldType ParseField(string fieldType) {
-            if (fieldType.CompareTo(empty.Type()) == 0)
+        private static IFieldType ParseField(string fieldType_) {
+            if (fieldType_.CompareTo(empty.Type()) == 0)
                 return empty;
 
-            if (fieldType.CompareTo(pkey.Type()) == 0)
+            if (fieldType_.CompareTo(pkey.Type()) == 0)
                 return pkey;
 
-            if (fieldType.CompareTo(@int.Type()) == 0)
+            if (fieldType_.CompareTo(@int.Type()) == 0)
                 return @int;
 
-            if (fieldType.CompareTo(intArray.Type()) == 0)
+            if (fieldType_.CompareTo(intArray.Type()) == 0)
                 return intArray;
 
-            if (fieldType.CompareTo(@long.Type()) == 0)
+            if (fieldType_.CompareTo(@long.Type()) == 0)
                 return @long;
 
-            if (fieldType.CompareTo(longArray.Type()) == 0)
+            if (fieldType_.CompareTo(longArray.Type()) == 0)
                 return longArray;
 
-            if (fieldType.CompareTo(real.Type()) == 0)
+            if (fieldType_.CompareTo(real.Type()) == 0)
                 return real;
 
-            if (fieldType.CompareTo(realArray.Type()) == 0)
+            if (fieldType_.CompareTo(realArray.Type()) == 0)
                 return realArray;
 
-            if (fieldType.CompareTo(text.Type()) == 0)
+            if (fieldType_.CompareTo(text.Type()) == 0)
                 return text;
 
-            if (fieldType.CompareTo(textArray.Type()) == 0)
+            if (fieldType_.CompareTo(textArray.Type()) == 0)
                 return textArray;
 
             return null;

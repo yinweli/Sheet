@@ -1,1 +1,1 @@
-call _Batch\Copy.bat Debug
+call Copy.bat Debug

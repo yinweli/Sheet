@@ -1,1 +1,1 @@
-call _Batch\Copy.bat Release
+call Copy.bat Release

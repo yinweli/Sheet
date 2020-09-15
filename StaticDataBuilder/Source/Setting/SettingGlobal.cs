@@ -1,10 +1,10 @@
-﻿namespace StaticData
-{
+﻿namespace StaticData {
+
     /// <summary>
     /// 全域設定資料
     /// </summary>
-    public class SettingGlobal
-    {
+    public class SettingGlobal {
+
         /// <summary>
         /// 檢查是否正確
         /// </summary>

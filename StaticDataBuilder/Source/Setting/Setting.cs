@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace StaticData
-{
+namespace StaticData {
+
     /// <summary>
     /// 設定資料
     /// </summary>
-    public class Setting
-    {
+    public class Setting {
+
         /// <summary>
         /// 檢查是否正確
         /// </summary>

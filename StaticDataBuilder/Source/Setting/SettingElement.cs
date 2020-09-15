@@ -1,12 +1,12 @@
 ﻿using System.IO;
 
-namespace StaticData
-{
+namespace StaticData {
+
     /// <summary>
     /// 項目設定資料
     /// </summary>
-    public class SettingElement
-    {
+    public class SettingElement {
+
         /// <summary>
         /// 檢查是否正確
         /// </summary>

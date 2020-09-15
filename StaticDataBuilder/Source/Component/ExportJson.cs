@@ -3,25 +3,35 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace StaticData
-{
+namespace StaticData {
+
     /// <summary>
     /// 匯出到json檔案
     /// </summary>
-    public class ExportJson
-    {
+    public class ExportJson {
+
+        /// <summary>
+        /// Json檔案的副檔名
+        /// </summary>
+        public const string jsonExtension = ".json";
+
+        /// <summary>
+        /// 錯誤訊息後綴字
+        /// </summary>
+        public const string errorSuffix = " @exportJson";
+
         /// <summary>
         /// 匯出到json檔案
         /// </summary>
-        /// <param name="settingGlobal">全域設定資料</param>
-        /// <param name="settingElement">項目設定資料</param>
-        /// <param name="import">匯入器</param>
+        /// <param name="settingGlobal_">全域設定資料</param>
+        /// <param name="settingElement_">項目設定資料</param>
+        /// <param name="import_">匯入器</param>
         /// <returns>true表示成功, false則否</returns>
-        public static bool Export(SettingGlobal settingGlobal, SettingElement settingElement, Import import) {
-            var filepath = Path.Combine(settingGlobal.outputPathJson, settingElement.elementName + EXPORT_EXT);
+        public static bool Export(SettingGlobal settingGlobal_, SettingElement settingElement_, Import import_) {
+            var filepath = Path.Combine(settingGlobal_.outputPathJson, settingElement_.elementName + jsonExtension);
             var fileContent = new List<string>();
-            var fields = import.GetFields();
-            var datas = import.GetDatas();
+            var fields = import_.GetFields();
+            var datas = import_.GetDatas();
             var result = true;
 
             for (int row = 0; row < datas.Count; ++row) {
@@ -39,7 +49,7 @@ namespace StaticData
                             var writeResult = field.fieldType.WriteJsonObject(jsonWriter, field.name, data[column]);
 
                             if (writeResult.CompareTo(string.Empty) != 0)
-                                result &= OutputError(settingElement.ToString(), "data error, field=" + field.name + ", row=" + row + ", error=" + writeResult);
+                                result &= OutputError(settingElement_.ToString(), "data error, field=" + field.name + ", row=" + row + ", error=" + writeResult);
                         }//if
                     }//for
 
@@ -49,7 +59,7 @@ namespace StaticData
                 fileContent.Add(stringBuilder.ToString());
             }//for
 
-            Directory.CreateDirectory(settingGlobal.outputPathJson);
+            Directory.CreateDirectory(settingGlobal_.outputPathJson);
             UtilityFile.WriteAllLine(filepath, fileContent);
 
             return result;
@@ -58,21 +68,11 @@ namespace StaticData
         /// <summary>
         /// 輸出錯誤訊息
         /// </summary>
-        /// <param name="title">標題字串</param>
-        /// <param name="message">訊息字串</param>
+        /// <param name="title_">標題字串</param>
+        /// <param name="message_">訊息字串</param>
         /// <returns>只回傳false</returns>
-        private static bool OutputError(string title, string message) {
-            return Output.Error(title + ERROR_SUFFIX, message);
+        private static bool OutputError(string title_, string message_) {
+            return Output.Error(title_ + errorSuffix, message_);
         }
-
-        /// <summary>
-        /// 錯誤訊息後綴字
-        /// </summary>
-        private const string ERROR_SUFFIX = " @exportJson";
-
-        /// <summary>
-        /// 匯出副檔名
-        /// </summary>
-        private const string EXPORT_EXT = ".json";
     }
 }

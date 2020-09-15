@@ -1,10 +1,10 @@
-﻿namespace StaticData
-{
+﻿namespace StaticData {
+
     /// <summary>
     /// 項目集合
     /// </summary>
-    public class Collection
-    {
+    public class Collection {
+
         /// <summary>
         /// 項目設定資料
         /// </summary>
