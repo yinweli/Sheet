@@ -1,5 +1,5 @@
 @ECHO OFF
 
-StaticDataBuilder\StaticDataBuilder.exe setting.yaml
+SheetBuilder\SheetBuilder.exe setting.yaml
 
 PAUSE

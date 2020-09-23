@@ -32,7 +32,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void Initialize() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length <= 0);
@@ -40,77 +40,77 @@ namespace UnitTest {
 
         [TestMethod]
         public void InitializeFileNameNull() {
-            var reader = new StaticData.Reader<FakeData>(null, LoadJson, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(null, LoadJson, ToPKey);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length == 1);
-            Assert.IsTrue(results[0].error == StaticData.ErrorId.FileNameNull);
+            Assert.IsTrue(results[0].error == Sheet.ErrorId.FileNameNull);
         }
 
         [TestMethod]
         public void InitializeFileNameEmpty() {
-            var reader = new StaticData.Reader<FakeData>(string.Empty, LoadJson, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(string.Empty, LoadJson, ToPKey);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length == 1);
-            Assert.IsTrue(results[0].error == StaticData.ErrorId.FileNameEmpty);
+            Assert.IsTrue(results[0].error == Sheet.ErrorId.FileNameEmpty);
         }
 
         [TestMethod]
         public void InitializeDelegateLoadNull() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, null, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, null, ToPKey);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length == 1);
-            Assert.IsTrue(results[0].error == StaticData.ErrorId.DelegateLoadNull);
+            Assert.IsTrue(results[0].error == Sheet.ErrorId.DelegateLoadNull);
         }
 
         [TestMethod]
         public void InitializeDelegatePKeyNull() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, LoadJson, null);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, LoadJson, null);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length == 1);
-            Assert.IsTrue(results[0].error == StaticData.ErrorId.DelegatePKeyNull);
+            Assert.IsTrue(results[0].error == Sheet.ErrorId.DelegatePKeyNull);
         }
 
         [TestMethod]
         public void InitializeDeserializeFailed() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, LoadJsonDeserializeFailed, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, LoadJsonDeserializeFailed, ToPKey);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length == 1);
-            Assert.IsTrue(results[0].error == StaticData.ErrorId.DeserializeFailed);
+            Assert.IsTrue(results[0].error == Sheet.ErrorId.DeserializeFailed);
         }
 
         [TestMethod]
         public void InitializePkeyDuplicate() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, LoadJsonPkeyDuplicate, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, LoadJsonPkeyDuplicate, ToPKey);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length == 1);
-            Assert.IsTrue(results[0].error == StaticData.ErrorId.PkeyDuplicate);
+            Assert.IsTrue(results[0].error == Sheet.ErrorId.PkeyDuplicate);
         }
 
         [TestMethod]
         public void InitializePkeyFailed() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, LoadJson, ToPKeyFailed);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, LoadJson, ToPKeyFailed);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length == 1);
-            Assert.IsTrue(results[0].error == StaticData.ErrorId.PkeyFailed);
+            Assert.IsTrue(results[0].error == Sheet.ErrorId.PkeyFailed);
         }
 
         [TestMethod]
         public void GetFileName() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
 
             Assert.IsTrue(reader.GetFileName() == FakeData.filename);
         }
 
         [TestMethod]
         public void Get() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length <= 0);
@@ -130,7 +130,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void Set() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length <= 0);
@@ -151,7 +151,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void SetNull() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length <= 0);
@@ -160,7 +160,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void Clear() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length <= 0);
@@ -173,7 +173,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void Count() {
-            var reader = new StaticData.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
+            var reader = new Sheet.Reader<FakeData>(FakeData.filename, LoadJson, ToPKey);
             var results = reader.Initialize();
 
             Assert.IsTrue(results.Length <= 0);
