@@ -1,6 +1,6 @@
 echo off
 set pathSource=SheetBuilder\bin\%1\netcoreapp3.1\*.*
-set pathTarget=_Output\SheetBuilder\
+set pathTarget=Output\SheetBuilder\
 echo on
 
 echo %pathSource%
