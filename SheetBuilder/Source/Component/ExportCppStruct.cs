@@ -130,10 +130,10 @@ inline void to_json(json& _j, const struct Sheet::{2}& _x)
                 DateTime.Now,
                 libraryPath,
                 elementName,
-                string.Join("\n", templateField),
+                string.Join(Environment.NewLine, templateField),
                 elementName + jsonExtension,
-                string.Join("\n", fromJsons),
-                string.Join("\n", toJsons));
+                string.Join(Environment.NewLine, fromJsons),
+                string.Join(Environment.NewLine, toJsons));
 
             Directory.CreateDirectory(settingGlobal_.outputPathCpp);
             UtilityFile.WriteAllText(filepath, context);

@@ -70,7 +70,7 @@ namespace Sheet {{
                 DateTime.Now,
                 elementName,
                 string.Format(filenameTemplate, elementName + jsonExtension),
-                string.Join("\n", fields));
+                string.Join(Environment.NewLine, fields));
 
             Directory.CreateDirectory(settingGlobal_.outputPathCs);
             UtilityFile.WriteAllText(filepath, context);
