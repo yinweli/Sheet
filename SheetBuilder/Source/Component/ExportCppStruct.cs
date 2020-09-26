@@ -50,12 +50,12 @@ using pkey = uint64_t;
 
 struct {2} {{
 {3}
-}};
 
-inline std::string get_filename()
-{{
-    return ""{4}"";
-}}
+    static std::string get_filename()
+    {{
+        return ""{4}"";
+    }}
+}};
 
 inline json get_untyped(const json& j, const char* property)
 {{
@@ -100,7 +100,8 @@ inline void to_json(json& _j, const struct Sheet::{2}& _x)
         /// <param name="import_">匯入器</param>
         /// <returns>true表示成功, false則否</returns>
         public static bool Export(SettingGlobal settingGlobal_, SettingElement settingElement_, Import import_) {
-            var filepath = Path.Combine(settingGlobal_.outputPathCpp, settingElement_.elementName + codeExtension);
+            var elementName = settingElement_.GetElementName();
+            var filepath = Path.Combine(settingGlobal_.outputPathCpp, elementName + codeExtension);
             var libraryPath = Path.Combine(settingGlobal_.cppLibraryPath, jsonLibraryName).Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
             var templateField = new List<string>();
             var fields = import_.GetFields();
@@ -128,9 +129,9 @@ inline void to_json(json& _j, const struct Sheet::{2}& _x)
                 codeTemplate,
                 DateTime.Now,
                 libraryPath,
-                settingElement_.elementName,
+                elementName,
                 string.Join("\n", templateField),
-                settingElement_.elementName + jsonExtension,
+                elementName + jsonExtension,
                 string.Join("\n", fromJsons),
                 string.Join("\n", toJsons));
 

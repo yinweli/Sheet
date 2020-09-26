@@ -18,9 +18,6 @@ namespace Sheet {
             if (sheetName == string.Empty)
                 return Output.Error("setting element", "sheet name empty");
 
-            if (elementName == string.Empty)
-                elementName = Path.GetFileNameWithoutExtension(excelName) + "_" + sheetName;
-
             if (pkeyStart <= 0)
                 return Output.Error("setting element", "pkey start too small");
 
@@ -28,6 +25,14 @@ namespace Sheet {
                 return Output.Error("setting element", "pkey start too large");
 
             return true;
+        }
+
+        /// <summary>
+        /// 取得項目名稱
+        /// </summary>
+        /// <returns>項目名稱</returns>
+        public string GetElementName() {
+            return Path.GetFileNameWithoutExtension(excelName) + sheetName;
         }
 
         public override string ToString() {
@@ -43,11 +48,6 @@ namespace Sheet {
         /// Excel表單名稱
         /// </summary>
         public string sheetName = string.Empty;
-
-        /// <summary>
-        /// 項目名稱
-        /// </summary>
-        public string elementName = string.Empty;
 
         /// <summary>
         /// 主要索引起始編號

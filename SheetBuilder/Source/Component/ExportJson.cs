@@ -28,7 +28,8 @@ namespace Sheet {
         /// <param name="import_">匯入器</param>
         /// <returns>true表示成功, false則否</returns>
         public static bool Export(SettingGlobal settingGlobal_, SettingElement settingElement_, Import import_) {
-            var filepath = Path.Combine(settingGlobal_.outputPathJson, settingElement_.elementName + jsonExtension);
+            var elementName = settingElement_.GetElementName();
+            var filepath = Path.Combine(settingGlobal_.outputPathJson, elementName + jsonExtension);
             var fileContent = new List<string>();
             var fields = import_.GetFields();
             var datas = import_.GetDatas();

@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "SheetBuilder": {
+      "commandName": "Project",
+      "commandLineArgs": "setting.yaml",
+      "workingDirectory": "D:\\project 4idStudio\\Sheet\\Output"
+    }
+  }
+}

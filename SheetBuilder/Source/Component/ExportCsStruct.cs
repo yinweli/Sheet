@@ -56,7 +56,8 @@ namespace Sheet {{
         /// <param name="import_">匯入器</param>
         /// <returns>true表示成功, false則否</returns>
         public static bool Export(SettingGlobal settingGlobal_, SettingElement settingElement_, Import import_) {
-            var filepath = Path.Combine(settingGlobal_.outputPathCs, settingElement_.elementName + codeExtension);
+            var elementName = settingElement_.GetElementName();
+            var filepath = Path.Combine(settingGlobal_.outputPathCs, elementName + codeExtension);
             var fields = new List<string>();
 
             foreach (var itor in import_.GetFields()) {
@@ -67,8 +68,8 @@ namespace Sheet {{
             var context = string.Format(
                 codeTemplate,
                 DateTime.Now,
-                settingElement_.elementName,
-                string.Format(filenameTemplate, settingElement_.elementName + jsonExtension),
+                elementName,
+                string.Format(filenameTemplate, elementName + jsonExtension),
                 string.Join("\n", fields));
 
             Directory.CreateDirectory(settingGlobal_.outputPathCs);
