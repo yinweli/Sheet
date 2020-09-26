@@ -32,7 +32,7 @@ namespace Sheet {
         /// <summary>
         /// 取得資料索引接口為空
         /// </summary>
-        DelegatePKeyNull,
+        DelegatePkeyNull,
 
         /// <summary>
         /// 反序列化失敗
@@ -107,7 +107,7 @@ namespace Sheet {
                 return new Result[] { new Result() { error = ErrorId.DelegateLoadNull } };
 
             if (delegatePkey == null)
-                return new Result[] { new Result() { error = ErrorId.DelegatePKeyNull } };
+                return new Result[] { new Result() { error = ErrorId.DelegatePkeyNull } };
 
             vaults.Clear();
 

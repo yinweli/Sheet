@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Folder Include="Source\Field\" />
-    <Folder Include="Source\Component\" />
     <Folder Include="Source\Setting\" />
   </ItemGroup>
 </Project>

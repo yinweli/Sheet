@@ -46,7 +46,7 @@ namespace Sheet {
                         var field = fields[column];
 
                         if (field.fieldType.IsExport()) {
-                            var writeResult = field.fieldType.WriteJsonObject(jsonWriter, field.name, data[column]);
+                            var writeResult = field.fieldType.WriteJsonObject(jsonWriter, field.name, data[column], settingElement_.pkeyStart);
 
                             if (writeResult.CompareTo(string.Empty) != 0)
                                 result &= OutputError(settingElement_.ToString(), "data error, field=" + field.name + ", row=" + row + ", error=" + writeResult);
