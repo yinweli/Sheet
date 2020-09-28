@@ -44,65 +44,57 @@ namespace UnitTest {
         [TestMethod]
         public void SetJsons() {
             var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
-            var resultId = reader.Set(Helper.GetJsons());
 
-            Assert.IsTrue(resultId == Sheet.ResultId.Success);
+            Assert.IsTrue(reader.Set(Helper.GetJsons()));
         }
 
         [TestMethod]
         public void SetJsonsNull() {
             var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
-            var resultId = reader.Set((string[])null);
 
-            Assert.IsTrue(resultId == Sheet.ResultId.JsonNull);
+            Assert.IsTrue(reader.Set((string[])null) == false);
         }
 
         [TestMethod]
         public void SetJson() {
             var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
-            var resultId = reader.Set(Helper.GetJson());
 
-            Assert.IsTrue(resultId == Sheet.ResultId.Success);
+            Assert.IsTrue(reader.Set(Helper.GetJson()));
         }
 
         [TestMethod]
         public void SetJsonDeserializeFailed() {
             var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
-            var resultId = reader.Set("??????????");
 
-            Assert.IsTrue(resultId == Sheet.ResultId.DeserializeFailed);
+            Assert.IsTrue(reader.Set("??????????") == false);
         }
 
         [TestMethod]
         public void SetObject() {
             var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
-            var resultId = reader.Set(Helper.GetData());
 
-            Assert.IsTrue(resultId == Sheet.ResultId.Success);
+            Assert.IsTrue(reader.Set(Helper.GetData()));
         }
 
         [TestMethod]
         public void SetObjectDataNull() {
             var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
-            var resultId = reader.Set((Helper.Data)null);
 
-            Assert.IsTrue(resultId == Sheet.ResultId.DataNull);
+            Assert.IsTrue(reader.Set((Helper.Data)null) == false);
         }
 
         [TestMethod]
         public void SetObjectDelegatePkeyNull() {
             var reader = new Sheet.Reader<Helper.Data>(null);
-            var resultId = reader.Set(Helper.GetData());
 
-            Assert.IsTrue(resultId == Sheet.ResultId.DelegatePkeyNull);
+            Assert.IsTrue(reader.Set(Helper.GetData()) == false);
         }
 
         [TestMethod]
         public void Get() {
             var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
-            var resultId = reader.Set(Helper.GetData());
 
-            Assert.IsTrue(resultId == Sheet.ResultId.Success);
+            Assert.IsTrue(reader.Set(Helper.GetData()));
 
             var data1 = Helper.GetData();
             var data2 = reader.Get(data1.pkey);
@@ -117,9 +109,8 @@ namespace UnitTest {
         [TestMethod]
         public void Clear() {
             var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
-            var resultId = reader.Set(Helper.GetData());
 
-            Assert.IsTrue(resultId == Sheet.ResultId.Success);
+            Assert.IsTrue(reader.Set(Helper.GetData()));
             Assert.IsTrue(reader.Get(Helper.GetData().pkey) != null);
 
             reader.Clear();
@@ -130,9 +121,8 @@ namespace UnitTest {
         [TestMethod]
         public void Count() {
             var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
-            var resultId = reader.Set(Helper.GetData());
 
-            Assert.IsTrue(resultId == Sheet.ResultId.Success);
+            Assert.IsTrue(reader.Set(Helper.GetData()));
             Assert.IsTrue(reader.Count() == 1);
         }
     }

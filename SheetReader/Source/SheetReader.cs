@@ -10,37 +10,6 @@ namespace Sheet {
     using pkey = Int64;
 
     /// <summary>
-    /// 結果列舉
-    /// </summary>
-    public enum ResultId {
-
-        /// <summary>
-        /// 成功
-        /// </summary>
-        Success,
-
-        /// <summary>
-        /// 資料為空
-        /// </summary>
-        DataNull,
-
-        /// <summary>
-        /// 取得資料索引接口為空
-        /// </summary>
-        DelegatePkeyNull,
-
-        /// <summary>
-        /// 反序列化失敗
-        /// </summary>
-        DeserializeFailed,
-
-        /// <summary>
-        /// json字串為空
-        /// </summary>
-        JsonNull,
-    }
-
-    /// <summary>
     /// 表格資料讀取器
     /// </summary>
     /// <typeparam name="T">表格資料型態</typeparam>
@@ -61,31 +30,29 @@ namespace Sheet {
         /// 設定資料
         /// </summary>
         /// <param name="jsons_">json字串列表</param>
-        /// <returns>結果列舉</returns>
-        public ResultId Set(string[] jsons_) {
+        /// <returns>true表示成功, false則否</returns>
+        public bool Set(string[] jsons_) {
             if (jsons_ == null)
-                return ResultId.JsonNull;
+                return false;
 
             foreach (var itor in jsons_) {
-                var resultId = Set(itor);
-
-                if (resultId != ResultId.Success)
-                    return resultId;
+                if (Set(itor) == false)
+                    return false;
             }//if
 
-            return ResultId.Success;
+            return true;
         }
 
         /// <summary>
         /// 設定資料
         /// </summary>
         /// <param name="json_">json字串</param>
-        /// <returns>結果列舉</returns>
-        public ResultId Set(string json_) {
+        /// <returns>true表示成功, false則否</returns>
+        public bool Set(string json_) {
             try {
                 return Set(JsonConvert.DeserializeObject<T>(json_));
             } catch (Exception) {
-                return ResultId.DeserializeFailed;
+                return false;
             }//try
         }
 
@@ -93,17 +60,17 @@ namespace Sheet {
         /// 設定資料
         /// </summary>
         /// <param name="data_">資料物件</param>
-        /// <returns>結果列舉</returns>
-        public ResultId Set(T data_) {
+        /// <returns>true表示成功, false則否</returns>
+        public bool Set(T data_) {
             if (data_ == null)
-                return ResultId.DataNull;
+                return false;
 
             if (delegatePkey == null)
-                return ResultId.DelegatePkeyNull;
+                return false;
 
             vaults[delegatePkey(data_)] = data_;
 
-            return ResultId.Success;
+            return true;
         }
 
         /// <summary>
