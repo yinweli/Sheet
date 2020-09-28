@@ -10,24 +10,19 @@ namespace Sheet {
     using pkey = Int64;
 
     /// <summary>
-    /// 錯誤列舉
+    /// 結果列舉
     /// </summary>
-    public enum ErrorId {
+    public enum ResultId {
 
         /// <summary>
-        /// 檔名為空
+        /// 成功
         /// </summary>
-        FileNameNull,
+        Success,
 
         /// <summary>
-        /// 檔名為空
+        /// 資料為空
         /// </summary>
-        FileNameEmpty,
-
-        /// <summary>
-        /// 讀取表格資料接口為空
-        /// </summary>
-        DelegateLoadNull,
+        DataNull,
 
         /// <summary>
         /// 取得資料索引接口為空
@@ -40,44 +35,16 @@ namespace Sheet {
         DeserializeFailed,
 
         /// <summary>
-        /// 資料索引重複
+        /// json字串為空
         /// </summary>
-        PkeyDuplicate,
-
-        /// <summary>
-        /// 資料索引錯誤
-        /// </summary>
-        PkeyFailed,
-    }
-
-    /// <summary>
-    /// 結果資料
-    /// </summary>
-    public struct Result {
-
-        /// <summary>
-        /// 錯誤列舉
-        /// </summary>
-        public ErrorId error;
-
-        /// <summary>
-        /// 行號
-        /// </summary>
-        public int line;
+        JsonNull,
     }
 
     /// <summary>
     /// 表格資料讀取器
     /// </summary>
     /// <typeparam name="T">表格資料型態</typeparam>
-    public class Reader<T> {
-
-        /// <summary>
-        /// 接口: 讀取表格資料
-        /// </summary>
-        /// <param name="filename_">資料檔名</param>
-        /// <returns>字串列表</returns>
-        public delegate string[] DelegateLoad(string filename_);
+    public class Reader<T> where T : class {
 
         /// <summary>
         /// 接口: 取得資料索引
@@ -86,89 +53,69 @@ namespace Sheet {
         /// <returns>資料索引</returns>
         public delegate pkey DelegatePkey(object data_);
 
-        public Reader(string filename_, DelegateLoad delegateLoad_, DelegatePkey delegatePkey_) {
-            filename = filename_;
-            delegateLoad = delegateLoad_;
+        public Reader(DelegatePkey delegatePkey_) {
             delegatePkey = delegatePkey_;
         }
 
         /// <summary>
-        /// 初始化處理
+        /// 設定資料
         /// </summary>
-        /// <returns>結果列表</returns>
-        public Result[] Initialize() {
-            if (filename == null)
-                return new Result[] { new Result() { error = ErrorId.FileNameNull } };
+        /// <param name="jsons_">json字串列表</param>
+        /// <returns>結果列舉</returns>
+        public ResultId Set(string[] jsons_) {
+            if (jsons_ == null)
+                return ResultId.JsonNull;
 
-            if (filename.Length <= 0)
-                return new Result[] { new Result() { error = ErrorId.FileNameEmpty } };
+            foreach (var itor in jsons_) {
+                var resultId = Set(itor);
 
-            if (delegateLoad == null)
-                return new Result[] { new Result() { error = ErrorId.DelegateLoadNull } };
+                if (resultId != ResultId.Success)
+                    return resultId;
+            }//if
 
-            if (delegatePkey == null)
-                return new Result[] { new Result() { error = ErrorId.DelegatePkeyNull } };
-
-            vaults.Clear();
-
-            var datas = delegateLoad(filename);
-            var results = new List<Result>();
-
-            for (var itor = 0; itor < datas.Length; ++itor) {
-                T data = default;
-
-                try {
-                    data = JsonConvert.DeserializeObject<T>(datas[itor]);
-                } catch (Exception) {
-                    results.Add(new Result() { error = ErrorId.DeserializeFailed, line = itor });
-                    continue;
-                }//try
-
-                try {
-                    vaults.Add(delegatePkey(data), data);
-                } catch (ArgumentException) {
-                    results.Add(new Result() { error = ErrorId.PkeyDuplicate, line = itor });
-                } catch (Exception) {
-                    results.Add(new Result() { error = ErrorId.PkeyFailed, line = itor });
-                }//try
-            }//for
-
-            return results.ToArray();
+            return ResultId.Success;
         }
 
         /// <summary>
-        /// 取得資料檔名
+        /// 設定資料
         /// </summary>
-        /// <returns>資料檔名</returns>
-        public string GetFileName() {
-            return filename;
-        }
-
-        /// <summary>
-        /// 取得資料
-        /// </summary>
-        /// <param name="pkey_">資料索引</param>
-        /// <returns>資料</returns>
-        public T Get(pkey pkey_) {
-            if (vaults.TryGetValue(pkey_, out var result))
-                return result;
-            else
-                return default(T);
+        /// <param name="json_">json字串</param>
+        /// <returns>結果列舉</returns>
+        public ResultId Set(string json_) {
+            try {
+                return Set(JsonConvert.DeserializeObject<T>(json_));
+            } catch (Exception) {
+                return ResultId.DeserializeFailed;
+            }//try
         }
 
         /// <summary>
         /// 設定資料
         /// </summary>
         /// <param name="data_">資料物件</param>
-        /// <returns>true表示成功, false則否</returns>
-        public bool Set(T data_) {
-            try {
-                vaults[delegatePkey(data_)] = data_;
+        /// <returns>結果列舉</returns>
+        public ResultId Set(T data_) {
+            if (data_ == null)
+                return ResultId.DataNull;
 
-                return true;
-            } catch (Exception) {
-                return false;
-            }//try
+            if (delegatePkey == null)
+                return ResultId.DelegatePkeyNull;
+
+            vaults[delegatePkey(data_)] = data_;
+
+            return ResultId.Success;
+        }
+
+        /// <summary>
+        /// 取得資料
+        /// </summary>
+        /// <param name="pkey_">資料索引</param>
+        /// <returns>資料物件</returns>
+        public T Get(pkey pkey_) {
+            if (vaults.TryGetValue(pkey_, out var result))
+                return result;
+
+            return null;
         }
 
         /// <summary>
@@ -209,16 +156,6 @@ namespace Sheet {
         public IEnumerator<KeyValuePair<pkey, T>> GetEnumerator() {
             return vaults.GetEnumerator();
         }
-
-        /// <summary>
-        /// 資料檔名
-        /// </summary>
-        private string filename = string.Empty;
-
-        /// <summary>
-        /// 接口: 讀取表格資料
-        /// </summary>
-        private DelegateLoad delegateLoad = null;
 
         /// <summary>
         /// 接口: 取得資料索引
