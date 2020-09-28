@@ -2,8 +2,8 @@
 global:
     excelPath: Excel
     outputPathJson: Json
-    outputPathCs: Reader
-    outputPathCpp: Reader
+    outputPathCs: SheetCs
+    outputPathCpp: SheetCpp
     cppLibraryPath: nlohmann
     
 elements:
