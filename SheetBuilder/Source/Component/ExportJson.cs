@@ -31,6 +31,7 @@ namespace Sheet {
             var elementName = settingElement_.GetElementName();
             var filepath = Path.Combine(settingGlobal_.outputPathJson, elementName + jsonExtension);
             var fileContent = new List<string>();
+            var pkeys = new HashSet<string>();
             var fields = import_.GetFields();
             var datas = import_.GetDatas();
             var result = true;
@@ -45,12 +46,20 @@ namespace Sheet {
 
                     for (int column = 0; column < data.Count; ++column) {
                         var field = fields[column];
+                        var value = data[column];
 
                         if (field.fieldType.IsExport()) {
-                            var writeResult = field.fieldType.WriteJsonObject(jsonWriter, field.name, data[column], settingElement_.pkeyStart);
+                            var writeResult = field.fieldType.WriteJsonObject(jsonWriter, field.name, value, settingElement_.pkeyStart);
 
-                            if (writeResult.CompareTo(string.Empty) != 0)
+                            if (writeResult.Length > 0)
                                 result &= OutputError(settingElement_.ToString(), "data error, field=" + field.name + ", row=" + row + ", error=" + writeResult);
+                        }//if
+
+                        if (field.fieldType.IsPrimaryKey()) {
+                            if (pkeys.Contains(value))
+                                result &= OutputError(settingElement_.ToString(), "data error, field=" + field.name + ", row=" + row + ", error=pkey duplicate");
+                            else
+                                pkeys.Add(value);
                         }//if
                     }//for
 
