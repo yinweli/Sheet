@@ -5,11 +5,6 @@ using System.Collections.Generic;
 namespace Sheet {
 
     /// <summary>
-    /// 資料索引型態
-    /// </summary>
-    using pkey = Int64;
-
-    /// <summary>
     /// 表格資料讀取器
     /// </summary>
     /// <typeparam name="T">表格資料型態</typeparam>
@@ -20,7 +15,7 @@ namespace Sheet {
         /// </summary>
         /// <param name="data_">表格資料</param>
         /// <returns>資料索引</returns>
-        public delegate pkey DelegatePkey(object data_);
+        public delegate long DelegatePkey(object data_);
 
         public Reader(DelegatePkey delegatePkey_) {
             delegatePkey = delegatePkey_;
@@ -68,7 +63,11 @@ namespace Sheet {
             if (delegatePkey == null)
                 return false;
 
-            vaults[delegatePkey(data_)] = data_;
+            try {
+                vaults[delegatePkey(data_)] = data_;
+            } catch (Exception) {
+                return false;
+            }//try
 
             return true;
         }
@@ -78,7 +77,7 @@ namespace Sheet {
         /// </summary>
         /// <param name="pkey_">資料索引</param>
         /// <returns>資料物件</returns>
-        public T Get(pkey pkey_) {
+        public T Get(long pkey_) {
             if (vaults.TryGetValue(pkey_, out var result))
                 return result;
 
@@ -104,7 +103,7 @@ namespace Sheet {
         /// 取得資料索引列表
         /// </summary>
         /// <returns>資料索引列表</returns>
-        public Dictionary<pkey, T>.KeyCollection Keys() {
+        public Dictionary<long, T>.KeyCollection Keys() {
             return vaults.Keys;
         }
 
@@ -112,7 +111,7 @@ namespace Sheet {
         /// 取得資料物件列表
         /// </summary>
         /// <returns>資料物件列表</returns>
-        public Dictionary<pkey, T>.ValueCollection Values() {
+        public Dictionary<long, T>.ValueCollection Values() {
             return vaults.Values;
         }
 
@@ -120,7 +119,7 @@ namespace Sheet {
         /// 取得資料索引與資料物件列表
         /// </summary>
         /// <returns>資料索引與資料物件列表</returns>
-        public IEnumerator<KeyValuePair<pkey, T>> GetEnumerator() {
+        public IEnumerator<KeyValuePair<long, T>> GetEnumerator() {
             return vaults.GetEnumerator();
         }
 
@@ -132,6 +131,6 @@ namespace Sheet {
         /// <summary>
         /// 資料列表
         /// </summary>
-        private Dictionary<pkey, T> vaults = new Dictionary<pkey, T>();
+        private Dictionary<long, T> vaults = new Dictionary<long, T>();
     }
 }

@@ -29,8 +29,6 @@ using System;
 using System.Collections.Generic;
 
 namespace Sheet {{
-    using pkey = Int64;
-
     public class {1} {{
 {2}
 {3}

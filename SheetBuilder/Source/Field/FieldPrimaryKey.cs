@@ -13,7 +13,7 @@ namespace Sheet {
         }
 
         public string TypeCs() {
-            return "pkey"; // pkey型態宣告在命名空間Sheet中
+            return "long";
         }
 
         public string TypeCpp() {

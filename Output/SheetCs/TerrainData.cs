@@ -1,14 +1,12 @@
-// generation time=2020-09-28 12:07:58
+// generation time=2020-09-29 11:15:39
 
 using System;
 using System.Collections.Generic;
 
 namespace Sheet {
-    using pkey = Int64;
-
     public class TerrainData {
         public const string filename = "TerrainData.json";
-        public pkey terrainId; // 地形編號
+        public long terrainId; // 地形編號
         public int terrainType; // 地形型態
         public string icon; // 圖示名稱
         public string sprite; // 圖形名稱
