@@ -6,10 +6,10 @@ namespace Sheet {
     /// <summary>
     /// 浮點數欄位
     /// </summary>
-    public class FieldReal : IFieldType {
+    public class FieldDouble : IFieldType {
 
         public string Type() {
-            return "real";
+            return "double";
         }
 
         public string TypeCs() {

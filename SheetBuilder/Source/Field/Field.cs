@@ -91,11 +91,17 @@ namespace Sheet {
             if (fieldType_.CompareTo(longArray.Type()) == 0)
                 return longArray;
 
-            if (fieldType_.CompareTo(real.Type()) == 0)
-                return real;
+            if (fieldType_.CompareTo(@float.Type()) == 0)
+                return @float;
 
-            if (fieldType_.CompareTo(realArray.Type()) == 0)
-                return realArray;
+            if (fieldType_.CompareTo(floatArray.Type()) == 0)
+                return floatArray;
+
+            if (fieldType_.CompareTo(@double.Type()) == 0)
+                return @double;
+
+            if (fieldType_.CompareTo(doubleArray.Type()) == 0)
+                return doubleArray;
 
             if (fieldType_.CompareTo(text.Type()) == 0)
                 return text;
@@ -112,8 +118,10 @@ namespace Sheet {
         private static IFieldType intArray = new FieldIntegerArray();
         private static IFieldType @long = new FieldLong();
         private static IFieldType longArray = new FieldLongArray();
-        private static IFieldType real = new FieldReal();
-        private static IFieldType realArray = new FieldRealArray();
+        private static IFieldType @float = new FieldFloat();
+        private static IFieldType floatArray = new FieldFloatArray();
+        private static IFieldType @double = new FieldDouble();
+        private static IFieldType doubleArray = new FieldDoubleArray();
         private static IFieldType text = new FieldText();
         private static IFieldType textArray = new FieldTextArray();
 
