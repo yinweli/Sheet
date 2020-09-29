@@ -71,7 +71,7 @@ namespace Sheet {{
                 string.Join(Environment.NewLine, fields));
 
             Directory.CreateDirectory(settingGlobal_.outputPathCs);
-            UtilityFile.WriteAllText(filepath, context);
+            UtilityFile.WriteAllText(filepath, context, settingGlobal_.bom);
 
             return true;
         }

@@ -1,4 +1,4 @@
-{"terrainId":10000000001,"terrainType":2,"icon":"base00","sprite":"Map/Base/base00","testReal":[0.1,0.2,0.3,0.4,0.5,1.1,1.2,10.5,200.1,300.99],"testText":["a","ab","abc","字串","嘿嘿嘿","測試字串很多字喔"]}
+﻿{"terrainId":10000000001,"terrainType":2,"icon":"base00","sprite":"Map/Base/base00","testReal":[0.1,0.2,0.3,0.4,0.5,1.1,1.2,10.5,200.1,300.99],"testText":["a","ab","abc","字串","嘿嘿嘿","測試字串很多字喔"]}
 {"terrainId":10000000002,"terrainType":2,"icon":"base01","sprite":"Map/Base/base01","testReal":[0.1,0.2,0.3,0.4,0.5,1.1,1.2,10.5,200.1,300.99],"testText":["a","ab","abc","字串","嘿嘿嘿","測試字串很多字喔"]}
 {"terrainId":10000000003,"terrainType":2,"icon":"base02","sprite":"Map/Base/base02","testReal":[0.1,0.2,0.3,0.4,0.5,1.1,1.2,10.5,200.1,300.99],"testText":["a","ab","abc","字串","嘿嘿嘿","測試字串很多字喔"]}
 {"terrainId":10000000004,"terrainType":2,"icon":"base03","sprite":"Map/Base/base03","testReal":[0.1,0.2,0.3,0.4,0.5,1.1,1.2,10.5,200.1,300.99],"testText":["a","ab","abc","字串","嘿嘿嘿","測試字串很多字喔"]}

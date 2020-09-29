@@ -136,7 +136,7 @@ inline void to_json(json& _j, const struct Sheet::{2}& _x)
                 string.Join(Environment.NewLine, toJsons));
 
             Directory.CreateDirectory(settingGlobal_.outputPathCpp);
-            UtilityFile.WriteAllText(filepath, context);
+            UtilityFile.WriteAllText(filepath, context, settingGlobal_.bom);
 
             return true;
         }

@@ -70,7 +70,7 @@ namespace Sheet {
             }//for
 
             Directory.CreateDirectory(settingGlobal_.outputPathJson);
-            UtilityFile.WriteAllLine(filepath, fileContent);
+            UtilityFile.WriteAllLine(filepath, fileContent, settingGlobal_.bom);
 
             return result;
         }

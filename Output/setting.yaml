@@ -5,6 +5,7 @@ global:
     outputPathCs: SheetCs
     outputPathCpp: SheetCpp
     cppLibraryPath: nlohmann
+    bom: true
     
 elements:
     - excelName: Terrain.xlsx

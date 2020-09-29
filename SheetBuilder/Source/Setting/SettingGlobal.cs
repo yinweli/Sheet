@@ -64,5 +64,10 @@
         /// 函式庫路徑: cpp
         /// </summary>
         public string cppLibraryPath = null;
+
+        /// <summary>
+        /// 輸出的檔案是否使用順序標記(BOM)
+        /// </summary>
+        public bool bom = false;
     }
 }
