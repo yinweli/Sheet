@@ -73,57 +73,65 @@ namespace Sheet {
         /// <param name="fieldType_">欄位型態字串</param>
         /// <returns>欄位型態物件</returns>
         private static IFieldType ParseField(string fieldType_) {
-            if (fieldType_.CompareTo(empty.Type()) == 0)
-                return empty;
+            if (fieldType_.CompareTo(fieldEmpty.Type()) == 0)
+                return fieldEmpty;
 
-            if (fieldType_.CompareTo(pkey.Type()) == 0)
-                return pkey;
+            if (fieldType_.CompareTo(fieldPkey.Type()) == 0)
+                return fieldPkey;
 
-            if (fieldType_.CompareTo(@int.Type()) == 0)
-                return @int;
+            if (fieldType_.CompareTo(fieldBool.Type()) == 0)
+                return fieldBool;
 
-            if (fieldType_.CompareTo(intArray.Type()) == 0)
-                return intArray;
+            if (fieldType_.CompareTo(fieldBoolArray.Type()) == 0)
+                return fieldBoolArray;
 
-            if (fieldType_.CompareTo(@long.Type()) == 0)
-                return @long;
+            if (fieldType_.CompareTo(fieldInt.Type()) == 0)
+                return fieldInt;
 
-            if (fieldType_.CompareTo(longArray.Type()) == 0)
-                return longArray;
+            if (fieldType_.CompareTo(fieldIntArray.Type()) == 0)
+                return fieldIntArray;
 
-            if (fieldType_.CompareTo(@float.Type()) == 0)
-                return @float;
+            if (fieldType_.CompareTo(fieldLong.Type()) == 0)
+                return fieldLong;
 
-            if (fieldType_.CompareTo(floatArray.Type()) == 0)
-                return floatArray;
+            if (fieldType_.CompareTo(fieldLongArray.Type()) == 0)
+                return fieldLongArray;
 
-            if (fieldType_.CompareTo(@double.Type()) == 0)
-                return @double;
+            if (fieldType_.CompareTo(fieldFloat.Type()) == 0)
+                return fieldFloat;
 
-            if (fieldType_.CompareTo(doubleArray.Type()) == 0)
-                return doubleArray;
+            if (fieldType_.CompareTo(fieldFloatArray.Type()) == 0)
+                return fieldFloatArray;
 
-            if (fieldType_.CompareTo(text.Type()) == 0)
-                return text;
+            if (fieldType_.CompareTo(fieldDouble.Type()) == 0)
+                return fieldDouble;
 
-            if (fieldType_.CompareTo(textArray.Type()) == 0)
-                return textArray;
+            if (fieldType_.CompareTo(fieldDoubleArray.Type()) == 0)
+                return fieldDoubleArray;
+
+            if (fieldType_.CompareTo(fieldText.Type()) == 0)
+                return fieldText;
+
+            if (fieldType_.CompareTo(fieldTextArray.Type()) == 0)
+                return fieldTextArray;
 
             return null;
         }
 
-        private static IFieldType empty = new FieldEmpty();
-        private static IFieldType pkey = new FieldPrimaryKey();
-        private static IFieldType @int = new FieldInteger();
-        private static IFieldType intArray = new FieldIntegerArray();
-        private static IFieldType @long = new FieldLong();
-        private static IFieldType longArray = new FieldLongArray();
-        private static IFieldType @float = new FieldFloat();
-        private static IFieldType floatArray = new FieldFloatArray();
-        private static IFieldType @double = new FieldDouble();
-        private static IFieldType doubleArray = new FieldDoubleArray();
-        private static IFieldType text = new FieldText();
-        private static IFieldType textArray = new FieldTextArray();
+        private static IFieldType fieldEmpty = new FieldEmpty();
+        private static IFieldType fieldPkey = new FieldPrimaryKey();
+        private static IFieldType fieldBool = new FieldBoolean();
+        private static IFieldType fieldBoolArray = new FieldBooleanArray();
+        private static IFieldType fieldInt = new FieldInteger();
+        private static IFieldType fieldIntArray = new FieldIntegerArray();
+        private static IFieldType fieldLong = new FieldLong();
+        private static IFieldType fieldLongArray = new FieldLongArray();
+        private static IFieldType fieldFloat = new FieldFloat();
+        private static IFieldType fieldFloatArray = new FieldFloatArray();
+        private static IFieldType fieldDouble = new FieldDouble();
+        private static IFieldType fieldDoubleArray = new FieldDoubleArray();
+        private static IFieldType fieldText = new FieldText();
+        private static IFieldType fieldTextArray = new FieldTextArray();
 
         /// <summary>
         /// 原始字串

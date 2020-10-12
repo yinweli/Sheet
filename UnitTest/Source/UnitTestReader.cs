@@ -10,6 +10,7 @@ namespace UnitTest {
 
             public class Data {
                 public long pkey;
+                public bool value0;
                 public int value1;
                 public double value2;
                 public string value3;
@@ -18,6 +19,7 @@ namespace UnitTest {
             public static Data GetData(long pkey_ = 0) {
                 return new Data() {
                     pkey = pkey_,
+                    value0 = true,
                     value1 = 100,
                     value2 = 22.2f,
                     value3 = "value3",
@@ -101,6 +103,7 @@ namespace UnitTest {
 
             Assert.IsTrue(data2 != null);
             Assert.IsTrue(data2.pkey == data1.pkey);
+            Assert.IsTrue(data2.value0 == data1.value0);
             Assert.IsTrue(data2.value1 == data1.value1);
             Assert.IsTrue(data2.value2 == data1.value2);
             Assert.IsTrue(data2.value3 == data1.value3);
