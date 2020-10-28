@@ -3,19 +3,17 @@ using System;
 using System.Collections.Generic;
 
 namespace Sheet {
-
     /// <summary>
     /// 表格資料讀取器
     /// </summary>
     /// <typeparam name="T">表格資料型態</typeparam>
     public class Reader<T> where T : class {
-
         /// <summary>
         /// 接口: 取得資料索引
         /// </summary>
         /// <param name="data_">表格資料</param>
         /// <returns>資料索引</returns>
-        public delegate long DelegatePkey(object data_);
+        public delegate int DelegatePkey(object data_);
 
         public Reader(DelegatePkey delegatePkey_) {
             delegatePkey = delegatePkey_;
@@ -77,7 +75,7 @@ namespace Sheet {
         /// </summary>
         /// <param name="pkey_">資料索引</param>
         /// <returns>資料物件</returns>
-        public T Get(long pkey_) {
+        public T Get(int pkey_) {
             if (vaults.TryGetValue(pkey_, out var result))
                 return result;
 
@@ -103,7 +101,7 @@ namespace Sheet {
         /// 取得資料索引列表
         /// </summary>
         /// <returns>資料索引列表</returns>
-        public Dictionary<long, T>.KeyCollection Keys() {
+        public Dictionary<int, T>.KeyCollection Keys() {
             return vaults.Keys;
         }
 
@@ -111,7 +109,7 @@ namespace Sheet {
         /// 取得資料物件列表
         /// </summary>
         /// <returns>資料物件列表</returns>
-        public Dictionary<long, T>.ValueCollection Values() {
+        public Dictionary<int, T>.ValueCollection Values() {
             return vaults.Values;
         }
 
@@ -119,7 +117,7 @@ namespace Sheet {
         /// 取得資料索引與資料物件列表
         /// </summary>
         /// <returns>資料索引與資料物件列表</returns>
-        public IEnumerator<KeyValuePair<long, T>> GetEnumerator() {
+        public IEnumerator<KeyValuePair<int, T>> GetEnumerator() {
             return vaults.GetEnumerator();
         }
 
@@ -131,6 +129,6 @@ namespace Sheet {
         /// <summary>
         /// 資料列表
         /// </summary>
-        private Dictionary<long, T> vaults = new Dictionary<long, T>();
+        private Dictionary<int, T> vaults = new Dictionary<int, T>();
     }
 }
