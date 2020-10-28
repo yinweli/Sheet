@@ -13,7 +13,7 @@ namespace Sheet {
         }
 
         public string TypeCs() {
-            return "long";
+            return "int";
         }
 
         public string TypeCpp() {

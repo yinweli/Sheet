@@ -1,4 +1,4 @@
-﻿// generation time=2020-10-28 14:56:09
+﻿// generation time=2020-10-28 19:07:00
 // use nlohmann's json library
 // github: https://github.com/nlohmann/json
 
@@ -15,7 +15,7 @@ using nlohmann::json;
 
 #ifndef PKEY
 #define PKEY
-using pkey = uint64_t;
+using pkey = int32_t;
 #endif // !PKEY
 
 struct TerrainData {

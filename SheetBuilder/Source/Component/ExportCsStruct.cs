@@ -44,7 +44,7 @@ namespace Sheet {{
         /// <summary>
         /// 程式碼樣板: 主要索引起始編號
         /// </summary>
-        public const string pkeyStartTemplate = @"        public const long pkeyStart = {0};";
+        public const string pkeyStartTemplate = @"        public const int pkeyStart = {0};";
 
         /// <summary>
         /// 程式碼樣板: 欄位

@@ -45,7 +45,7 @@ using nlohmann::json;
 
 #ifndef PKEY
 #define PKEY
-using pkey = uint64_t;
+using pkey = int32_t;
 #endif // !PKEY
 
 struct {2} {{

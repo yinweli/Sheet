@@ -10,7 +10,7 @@ namespace Sheet {
         /// <summary>
         /// 表格的數字位數
         /// </summary>
-        public const long sheetDigits = 100000;
+        public const long sheetDigits = 10000;
 
         /// <summary>
         /// 主要索引的數字位數
