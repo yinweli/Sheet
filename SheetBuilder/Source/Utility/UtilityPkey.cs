@@ -41,7 +41,7 @@ namespace Sheet {
         /// <param name="pkeyStart_">主要索引起始編號</param>
         /// <param name="pkey_">主要索引</param>
         /// <returns>主要索引</returns>
-        public static long NormalizePkey(long pkeyStart_, long pkey_) {
+        public static long NormalizePkey(long pkeyStart_, long pkey_ = 0) {
             return pkeyStart_ * pkeyDigits + pkey_;
         }
     }

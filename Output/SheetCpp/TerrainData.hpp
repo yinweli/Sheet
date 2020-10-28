@@ -1,4 +1,4 @@
-﻿// generation time=2020-10-12 22:53:32
+﻿// generation time=2020-10-28 13:56:54
 // use nlohmann's json library
 // github: https://github.com/nlohmann/json
 
@@ -30,6 +30,11 @@ struct TerrainData {
     static std::string get_filename()
     {
         return "TerrainData.json";
+    }
+
+    static pkey get_pkeystart()
+    {
+        return 10000000000;
     }
 };
 

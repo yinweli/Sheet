@@ -55,6 +55,11 @@ struct {2} {{
     {{
         return ""{4}"";
     }}
+
+    static pkey get_pkeystart()
+    {{
+        return {5};
+    }}
 }};
 
 inline json get_untyped(const json& j, const char* property)
@@ -66,13 +71,13 @@ inline json get_untyped(const json& j, const char* property)
 namespace nlohmann {{
 inline void from_json(const json& _j, struct Sheet::{2}& _x)
 {{
-{5}
+{6}
 }}
 
 inline void to_json(json& _j, const struct Sheet::{2}& _x)
 {{
     _j = json::object();
-{6}
+{7}
 }}
 }} // namespace nlohmann";
 
@@ -132,6 +137,7 @@ inline void to_json(json& _j, const struct Sheet::{2}& _x)
                 elementName,
                 string.Join(Environment.NewLine, templateField),
                 elementName + jsonExtension,
+                UtilityPkey.NormalizePkey(settingElement_.pkeyStart),
                 string.Join(Environment.NewLine, fromJsons),
                 string.Join(Environment.NewLine, toJsons));
 

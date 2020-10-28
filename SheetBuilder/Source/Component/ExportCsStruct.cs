@@ -32,6 +32,7 @@ namespace Sheet {{
     public class {1} {{
 {2}
 {3}
+{4}
     }}
 }}";
 
@@ -39,6 +40,11 @@ namespace Sheet {{
         /// 程式碼樣板: 檔案名稱
         /// </summary>
         public const string filenameTemplate = @"        public const string filename = ""{0}"";";
+
+        /// <summary>
+        /// 程式碼樣板: 主要索引起始編號
+        /// </summary>
+        public const string pkeyStartTemplate = @"        public const long pkeyStart = {0};";
 
         /// <summary>
         /// 程式碼樣板: 欄位
@@ -68,6 +74,7 @@ namespace Sheet {{
                 DateTime.Now,
                 elementName,
                 string.Format(filenameTemplate, elementName + jsonExtension),
+                string.Format(pkeyStartTemplate, UtilityPkey.NormalizePkey(settingElement_.pkeyStart)),
                 string.Join(Environment.NewLine, fields));
 
             Directory.CreateDirectory(settingGlobal_.outputPathCs);
