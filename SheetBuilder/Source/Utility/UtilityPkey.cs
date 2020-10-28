@@ -15,7 +15,7 @@ namespace Sheet {
         /// <summary>
         /// 主要索引的數字位數
         /// </summary>
-        public const long pkeyDigits = 10000000000;
+        public const long pkeyDigits = 100000;
 
         /// <summary>
         /// 檢查主要索引起始編號是否正確
