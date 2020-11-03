@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
-namespace Sheet {
+namespace SheetDefine {
     /// <summary>
     /// 表格資料讀取器
     /// </summary>
