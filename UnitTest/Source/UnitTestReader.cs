@@ -9,14 +9,14 @@ namespace UnitTest {
         private class Helper {
 
             public class Data {
-                public long pkey;
+                public int pkey;
                 public bool value0;
                 public int value1;
                 public double value2;
                 public string value3;
             }
 
-            public static Data GetData(long pkey_ = 0) {
+            public static Data GetData(int pkey_ = 0) {
                 return new Data() {
                     pkey = pkey_,
                     value0 = true,
@@ -26,7 +26,7 @@ namespace UnitTest {
                 };
             }
 
-            public static string GetJson(long pkey_ = 0) {
+            public static string GetJson(int pkey_ = 0) {
                 return JsonConvert.SerializeObject(GetData(pkey_));
             }
 
@@ -38,7 +38,7 @@ namespace UnitTest {
                 };
             }
 
-            public static long ToPkey(object data_) {
+            public static int ToPkey(object data_) {
                 return (data_ as Data).pkey;
             }
         }

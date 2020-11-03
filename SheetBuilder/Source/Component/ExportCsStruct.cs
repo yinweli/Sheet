@@ -28,7 +28,7 @@ namespace Sheet {
 using System;
 using System.Collections.Generic;
 
-namespace Sheet {{
+namespace SheetDefine {{
     public class {1} {{
 {2}
 {3}

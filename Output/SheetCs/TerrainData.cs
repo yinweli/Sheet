@@ -1,9 +1,9 @@
-﻿// generation time=2020-10-28 19:07:00
+﻿// generation time=2020-11-03 16:32:40
 
 using System;
 using System.Collections.Generic;
 
-namespace Sheet {
+namespace SheetDefine {
     public class TerrainData {
         public const string filename = "TerrainData.json";
         public const int pkeyStart = 100000;

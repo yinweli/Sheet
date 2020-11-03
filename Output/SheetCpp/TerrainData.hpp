@@ -1,4 +1,4 @@
-﻿// generation time=2020-10-28 19:07:00
+﻿// generation time=2020-11-03 16:32:40
 // use nlohmann's json library
 // github: https://github.com/nlohmann/json
 
@@ -10,7 +10,7 @@
 
 #include "nlohmann/json.hpp"
 
-namespace Sheet {
+namespace SheetDefine {
 using nlohmann::json;
 
 #ifndef PKEY
