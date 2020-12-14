@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace UnitTest {
 
     [TestClass]
-    public class UnitTestReader {
+    public class UnitTestReaderT {
 
         private class Helper {
 
@@ -38,63 +38,63 @@ namespace UnitTest {
                 };
             }
 
-            public static int ToPkey(object data_) {
-                return (data_ as Data).pkey;
+            public static int ToPkey(Data data_) {
+                return data_.pkey;
             }
         }
 
         [TestMethod]
         public void SetJsons() {
-            var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
+            var reader = new SheetDefine.Reader<Helper.Data>(Helper.ToPkey);
 
             Assert.IsTrue(reader.Set(Helper.GetJsons()));
         }
 
         [TestMethod]
         public void SetJsonsNull() {
-            var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
+            var reader = new SheetDefine.Reader<Helper.Data>(Helper.ToPkey);
 
             Assert.IsTrue(reader.Set((string[])null) == false);
         }
 
         [TestMethod]
         public void SetJson() {
-            var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
+            var reader = new SheetDefine.Reader<Helper.Data>(Helper.ToPkey);
 
             Assert.IsTrue(reader.Set(Helper.GetJson()));
         }
 
         [TestMethod]
         public void SetJsonDeserializeFailed() {
-            var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
+            var reader = new SheetDefine.Reader<Helper.Data>(Helper.ToPkey);
 
             Assert.IsTrue(reader.Set("??????????") == false);
         }
 
         [TestMethod]
-        public void SetObject() {
-            var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
+        public void SetData() {
+            var reader = new SheetDefine.Reader<Helper.Data>(Helper.ToPkey);
 
             Assert.IsTrue(reader.Set(Helper.GetData()));
         }
 
         [TestMethod]
-        public void SetObjectDataNull() {
-            var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
+        public void SetDataDataNull() {
+            var reader = new SheetDefine.Reader<Helper.Data>(Helper.ToPkey);
 
             Assert.IsTrue(reader.Set((Helper.Data)null) == false);
         }
 
         [TestMethod]
-        public void SetObjectDelegatePkeyNull() {
-            var reader = new Sheet.Reader<Helper.Data>(null);
+        public void SetDataDelegatePkeyNull() {
+            var reader = new SheetDefine.Reader<Helper.Data>(null);
 
             Assert.IsTrue(reader.Set(Helper.GetData()) == false);
         }
 
         [TestMethod]
         public void Get() {
-            var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
+            var reader = new SheetDefine.Reader<Helper.Data>(Helper.ToPkey);
 
             Assert.IsTrue(reader.Set(Helper.GetData()));
 
@@ -111,7 +111,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void Clear() {
-            var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
+            var reader = new SheetDefine.Reader<Helper.Data>(Helper.ToPkey);
 
             Assert.IsTrue(reader.Set(Helper.GetData()));
             Assert.IsTrue(reader.Get(Helper.GetData().pkey) != null);
@@ -123,7 +123,7 @@ namespace UnitTest {
 
         [TestMethod]
         public void Count() {
-            var reader = new Sheet.Reader<Helper.Data>(Helper.ToPkey);
+            var reader = new SheetDefine.Reader<Helper.Data>(Helper.ToPkey);
 
             Assert.IsTrue(reader.Set(Helper.GetData()));
             Assert.IsTrue(reader.Count() == 1);

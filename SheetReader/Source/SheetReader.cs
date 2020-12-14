@@ -1,7 +1,10 @@
 using Newtonsoft.Json;
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
+
+#if UNITY_STANDALONE
+using Sirenix.OdinInspector;
+#endif
 
 namespace SheetDefine {
 
@@ -132,7 +135,9 @@ namespace SheetDefine {
         /// <summary>
         /// 表格資料列表
         /// </summary>
+#if UNITY_STANDALONE
         [ShowInInspector, ReadOnly]
+#endif
         private Dictionary<int, T> vaults = new Dictionary<int, T>();
     }
 
@@ -144,22 +149,22 @@ namespace SheetDefine {
     public class Reader<T, D> where T : class where D : class {
 
         /// <summary>
-        /// 接口: 取得資料索引
-        /// </summary>
-        /// <param name="data_">表格資料</param>
-        /// <returns>資料索引</returns>
-        public delegate int DelegatePkey(T data_);
-
-        /// <summary>
         /// 接口: 轉換表格資料
         /// </summary>
         /// <param name="data_">原始表格資料</param>
         /// <returns>目標表格資料</returns>
         public delegate D DelegateTranslate(T data_);
 
-        public Reader(DelegatePkey delegatePkey_, DelegateTranslate delegateTranslate_) {
-            delegatePkey = delegatePkey_;
+        /// <summary>
+        /// 接口: 取得資料索引
+        /// </summary>
+        /// <param name="data_">目標表格資料</param>
+        /// <returns>資料索引</returns>
+        public delegate int DelegatePkey(D data_);
+
+        public Reader(DelegateTranslate delegateTranslate_, DelegatePkey delegatePkey_) {
             delegateTranslate = delegateTranslate_;
+            delegatePkey = delegatePkey_;
         }
 
         /// <summary>
@@ -201,14 +206,40 @@ namespace SheetDefine {
             if (data_ == null)
                 return false;
 
+            if (delegateTranslate == null)
+                return false;
+
+            if (delegatePkey == null)
+                return false;
+
+            try {
+                var data = delegateTranslate(data_);
+                var pkey = delegatePkey(data);
+
+                vaults[pkey] = data;
+            } catch (Exception) {
+                return false;
+            }//try
+
+            return true;
+        }
+
+        /// <summary>
+        /// 設定資料
+        /// </summary>
+        /// <param name="data_">資料物件</param>
+        /// <returns>true表示成功, false則否</returns>
+        public bool Set(D data_) {
+            if (data_ == null)
+                return false;
+
             if (delegatePkey == null)
                 return false;
 
             try {
                 var pkey = delegatePkey(data_);
-                var data = delegateTranslate(data_);
 
-                vaults[pkey] = data;
+                vaults[pkey] = data_;
             } catch (Exception) {
                 return false;
             }//try
@@ -268,19 +299,21 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// 接口: 取得資料索引
-        /// </summary>
-        private DelegatePkey delegatePkey = null;
-
-        /// <summary>
         /// 接口: 轉換表格資料
         /// </summary>
         private DelegateTranslate delegateTranslate = null;
 
         /// <summary>
+        /// 接口: 取得資料索引
+        /// </summary>
+        private DelegatePkey delegatePkey = null;
+
+        /// <summary>
         /// 表格資料列表
         /// </summary>
+#if UNITY_STANDALONE
         [ShowInInspector, ReadOnly]
+#endif
         private Dictionary<int, D> vaults = new Dictionary<int, D>();
     }
 }
