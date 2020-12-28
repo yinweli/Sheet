@@ -1,4 +1,4 @@
-﻿using OfficeOpenXml;
+using OfficeOpenXml;
 using System.Collections.Generic;
 
 namespace Sheet {

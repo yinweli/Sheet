@@ -1,4 +1,4 @@
-﻿namespace Sheet {
+namespace Sheet {
 
     /// <summary>
     /// 字串工具

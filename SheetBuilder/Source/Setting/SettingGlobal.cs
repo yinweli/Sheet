@@ -1,4 +1,4 @@
-﻿namespace Sheet {
+namespace Sheet {
 
     /// <summary>
     /// 全域設定資料

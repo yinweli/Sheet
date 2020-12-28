@@ -7,16 +7,18 @@ using Sirenix.OdinInspector;
 #endif
 
 namespace SheetDefine {
+
     /// <summary>
-    /// ªí®æ¸ê®ÆÅª¨ú¾¹
+    /// è¡¨æ ¼è³‡æ–™è®€å–å™¨
     /// </summary>
-    /// <typeparam name="T">ªí®æ¸ê®Æ«¬ºA</typeparam>
+    /// <typeparam name="T">è¡¨æ ¼è³‡æ–™å‹æ…‹</typeparam>
     public class Reader<T> where T : class {
+
         /// <summary>
-        /// ±µ¤f: ¨ú±o¸ê®Æ¯Á¤Ş
+        /// æ¥å£: å–å¾—è³‡æ–™ç´¢å¼•
         /// </summary>
-        /// <param name="data_">ªí®æ¸ê®Æ</param>
-        /// <returns>¸ê®Æ¯Á¤Ş</returns>
+        /// <param name="data_">è¡¨æ ¼è³‡æ–™</param>
+        /// <returns>è³‡æ–™ç´¢å¼•</returns>
         public delegate int DelegatePkey(T data_);
 
         public Reader(DelegatePkey delegatePkey_) {
@@ -24,10 +26,10 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// ¨ú±o¸ê®Æ
+        /// å–å¾—è³‡æ–™
         /// </summary>
-        /// <param name="pkey_">¸ê®Æ¯Á¤Ş</param>
-        /// <returns>¸ê®Æª«¥ó</returns>
+        /// <param name="pkey_">è³‡æ–™ç´¢å¼•</param>
+        /// <returns>è³‡æ–™ç‰©ä»¶</returns>
         public T Get(int pkey_) {
             if (vaults.TryGetValue(pkey_, out var result))
                 return result;
@@ -36,10 +38,10 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// ³]©w¸ê®Æ
+        /// è¨­å®šè³‡æ–™
         /// </summary>
-        /// <param name="jsons_">json¦r¦ê¦Cªí</param>
-        /// <returns>trueªí¥Ü¦¨¥\, false«h§_</returns>
+        /// <param name="jsons_">jsonå­—ä¸²åˆ—è¡¨</param>
+        /// <returns>trueè¡¨ç¤ºæˆåŠŸ, falseå‰‡å¦</returns>
         public bool Set(string[] jsons_) {
             if (jsons_ == null)
                 return false;
@@ -53,10 +55,10 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// ³]©w¸ê®Æ
+        /// è¨­å®šè³‡æ–™
         /// </summary>
-        /// <param name="json_">json¦r¦ê</param>
-        /// <returns>trueªí¥Ü¦¨¥\, false«h§_</returns>
+        /// <param name="json_">jsonå­—ä¸²</param>
+        /// <returns>trueè¡¨ç¤ºæˆåŠŸ, falseå‰‡å¦</returns>
         public bool Set(string json_) {
             try {
                 return Set(JsonConvert.DeserializeObject<T>(json_));
@@ -66,10 +68,10 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// ³]©w¸ê®Æ
+        /// è¨­å®šè³‡æ–™
         /// </summary>
-        /// <param name="data_">¸ê®Æª«¥ó</param>
-        /// <returns>trueªí¥Ü¦¨¥\, false«h§_</returns>
+        /// <param name="data_">è³‡æ–™ç‰©ä»¶</param>
+        /// <returns>trueè¡¨ç¤ºæˆåŠŸ, falseå‰‡å¦</returns>
         public bool Set(T data_) {
             if (data_ == null)
                 return false;
@@ -87,51 +89,51 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// ²M°£¸ê®Æ
+        /// æ¸…é™¤è³‡æ–™
         /// </summary>
         public void Clear() {
             vaults.Clear();
         }
 
         /// <summary>
-        /// ¨ú±o¸ê®Æ¼Æ¶q
+        /// å–å¾—è³‡æ–™æ•¸é‡
         /// </summary>
-        /// <returns>¸ê®Æ¼Æ¶q</returns>
+        /// <returns>è³‡æ–™æ•¸é‡</returns>
         public int Count() {
             return vaults.Count;
         }
 
         /// <summary>
-        /// ¨ú±o¸ê®Æ¯Á¤Ş¦Cªí
+        /// å–å¾—è³‡æ–™ç´¢å¼•åˆ—è¡¨
         /// </summary>
-        /// <returns>¸ê®Æ¯Á¤Ş¦Cªí</returns>
+        /// <returns>è³‡æ–™ç´¢å¼•åˆ—è¡¨</returns>
         public Dictionary<int, T>.KeyCollection Keys() {
             return vaults.Keys;
         }
 
         /// <summary>
-        /// ¨ú±o¸ê®Æª«¥ó¦Cªí
+        /// å–å¾—è³‡æ–™ç‰©ä»¶åˆ—è¡¨
         /// </summary>
-        /// <returns>¸ê®Æª«¥ó¦Cªí</returns>
+        /// <returns>è³‡æ–™ç‰©ä»¶åˆ—è¡¨</returns>
         public Dictionary<int, T>.ValueCollection Values() {
             return vaults.Values;
         }
 
         /// <summary>
-        /// ¨ú±o¸ê®Æ¯Á¤Ş»P¸ê®Æª«¥ó¦Cªí
+        /// å–å¾—è³‡æ–™ç´¢å¼•èˆ‡è³‡æ–™ç‰©ä»¶åˆ—è¡¨
         /// </summary>
-        /// <returns>¸ê®Æ¯Á¤Ş»P¸ê®Æª«¥ó¦Cªí</returns>
+        /// <returns>è³‡æ–™ç´¢å¼•èˆ‡è³‡æ–™ç‰©ä»¶åˆ—è¡¨</returns>
         public IEnumerator<KeyValuePair<int, T>> GetEnumerator() {
             return vaults.GetEnumerator();
         }
 
         /// <summary>
-        /// ±µ¤f: ¨ú±o¸ê®Æ¯Á¤Ş
+        /// æ¥å£: å–å¾—è³‡æ–™ç´¢å¼•
         /// </summary>
         private DelegatePkey delegatePkey = null;
 
         /// <summary>
-        /// ªí®æ¸ê®Æ¦Cªí
+        /// è¡¨æ ¼è³‡æ–™åˆ—è¡¨
         /// </summary>
 #if UNITY_STANDALONE
         [ShowInInspector, ReadOnly]
@@ -140,23 +142,24 @@ namespace SheetDefine {
     }
 
     /// <summary>
-    /// ªí®æ¸ê®ÆÅª¨ú¾¹
+    /// è¡¨æ ¼è³‡æ–™è®€å–å™¨
     /// </summary>
-    /// <typeparam name="T">­ì©lªí®æ¸ê®Æ«¬ºA</typeparam>
-    /// <typeparam name="D">¥Ø¼Ğªí®æ¸ê®Æ«¬ºA</typeparam>
+    /// <typeparam name="T">åŸå§‹è¡¨æ ¼è³‡æ–™å‹æ…‹</typeparam>
+    /// <typeparam name="D">ç›®æ¨™è¡¨æ ¼è³‡æ–™å‹æ…‹</typeparam>
     public class Reader<T, D> where T : class where D : class {
+
         /// <summary>
-        /// ±µ¤f: Âà´«ªí®æ¸ê®Æ
+        /// æ¥å£: è½‰æ›è¡¨æ ¼è³‡æ–™
         /// </summary>
-        /// <param name="data_">­ì©lªí®æ¸ê®Æ</param>
-        /// <returns>¥Ø¼Ğªí®æ¸ê®Æ</returns>
+        /// <param name="data_">åŸå§‹è¡¨æ ¼è³‡æ–™</param>
+        /// <returns>ç›®æ¨™è¡¨æ ¼è³‡æ–™</returns>
         public delegate D DelegateTranslate(T data_);
 
         /// <summary>
-        /// ±µ¤f: ¨ú±o¸ê®Æ¯Á¤Ş
+        /// æ¥å£: å–å¾—è³‡æ–™ç´¢å¼•
         /// </summary>
-        /// <param name="data_">¥Ø¼Ğªí®æ¸ê®Æ</param>
-        /// <returns>¸ê®Æ¯Á¤Ş</returns>
+        /// <param name="data_">ç›®æ¨™è¡¨æ ¼è³‡æ–™</param>
+        /// <returns>è³‡æ–™ç´¢å¼•</returns>
         public delegate int DelegatePkey(D data_);
 
         public Reader(DelegateTranslate delegateTranslate_, DelegatePkey delegatePkey_) {
@@ -165,10 +168,10 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// ³]©w¸ê®Æ
+        /// è¨­å®šè³‡æ–™
         /// </summary>
-        /// <param name="jsons_">json¦r¦ê¦Cªí</param>
-        /// <returns>trueªí¥Ü¦¨¥\, false«h§_</returns>
+        /// <param name="jsons_">jsonå­—ä¸²åˆ—è¡¨</param>
+        /// <returns>trueè¡¨ç¤ºæˆåŠŸ, falseå‰‡å¦</returns>
         public bool Set(string[] jsons_) {
             if (jsons_ == null)
                 return false;
@@ -182,10 +185,10 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// ³]©w¸ê®Æ
+        /// è¨­å®šè³‡æ–™
         /// </summary>
-        /// <param name="json_">json¦r¦ê</param>
-        /// <returns>trueªí¥Ü¦¨¥\, false«h§_</returns>
+        /// <param name="json_">jsonå­—ä¸²</param>
+        /// <returns>trueè¡¨ç¤ºæˆåŠŸ, falseå‰‡å¦</returns>
         public bool Set(string json_) {
             try {
                 return Set(JsonConvert.DeserializeObject<T>(json_));
@@ -195,10 +198,10 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// ³]©w¸ê®Æ
+        /// è¨­å®šè³‡æ–™
         /// </summary>
-        /// <param name="data_">¸ê®Æª«¥ó</param>
-        /// <returns>trueªí¥Ü¦¨¥\, false«h§_</returns>
+        /// <param name="data_">è³‡æ–™ç‰©ä»¶</param>
+        /// <returns>trueè¡¨ç¤ºæˆåŠŸ, falseå‰‡å¦</returns>
         public bool Set(T data_) {
             if (data_ == null)
                 return false;
@@ -222,10 +225,10 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// ³]©w¸ê®Æ
+        /// è¨­å®šè³‡æ–™
         /// </summary>
-        /// <param name="data_">¸ê®Æª«¥ó</param>
-        /// <returns>trueªí¥Ü¦¨¥\, false«h§_</returns>
+        /// <param name="data_">è³‡æ–™ç‰©ä»¶</param>
+        /// <returns>trueè¡¨ç¤ºæˆåŠŸ, falseå‰‡å¦</returns>
         public bool Set(D data_) {
             if (data_ == null)
                 return false;
@@ -245,10 +248,10 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// ¨ú±o¸ê®Æ
+        /// å–å¾—è³‡æ–™
         /// </summary>
-        /// <param name="pkey_">¸ê®Æ¯Á¤Ş</param>
-        /// <returns>¸ê®Æª«¥ó</returns>
+        /// <param name="pkey_">è³‡æ–™ç´¢å¼•</param>
+        /// <returns>è³‡æ–™ç‰©ä»¶</returns>
         public D Get(int pkey_) {
             if (vaults.TryGetValue(pkey_, out var result))
                 return result;
@@ -257,56 +260,56 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// ²M°£¸ê®Æ
+        /// æ¸…é™¤è³‡æ–™
         /// </summary>
         public void Clear() {
             vaults.Clear();
         }
 
         /// <summary>
-        /// ¨ú±o¸ê®Æ¼Æ¶q
+        /// å–å¾—è³‡æ–™æ•¸é‡
         /// </summary>
-        /// <returns>¸ê®Æ¼Æ¶q</returns>
+        /// <returns>è³‡æ–™æ•¸é‡</returns>
         public int Count() {
             return vaults.Count;
         }
 
         /// <summary>
-        /// ¨ú±o¸ê®Æ¯Á¤Ş¦Cªí
+        /// å–å¾—è³‡æ–™ç´¢å¼•åˆ—è¡¨
         /// </summary>
-        /// <returns>¸ê®Æ¯Á¤Ş¦Cªí</returns>
+        /// <returns>è³‡æ–™ç´¢å¼•åˆ—è¡¨</returns>
         public Dictionary<int, D>.KeyCollection Keys() {
             return vaults.Keys;
         }
 
         /// <summary>
-        /// ¨ú±o¸ê®Æª«¥ó¦Cªí
+        /// å–å¾—è³‡æ–™ç‰©ä»¶åˆ—è¡¨
         /// </summary>
-        /// <returns>¸ê®Æª«¥ó¦Cªí</returns>
+        /// <returns>è³‡æ–™ç‰©ä»¶åˆ—è¡¨</returns>
         public Dictionary<int, D>.ValueCollection Values() {
             return vaults.Values;
         }
 
         /// <summary>
-        /// ¨ú±o¸ê®Æ¯Á¤Ş»P¸ê®Æª«¥ó¦Cªí
+        /// å–å¾—è³‡æ–™ç´¢å¼•èˆ‡è³‡æ–™ç‰©ä»¶åˆ—è¡¨
         /// </summary>
-        /// <returns>¸ê®Æ¯Á¤Ş»P¸ê®Æª«¥ó¦Cªí</returns>
+        /// <returns>è³‡æ–™ç´¢å¼•èˆ‡è³‡æ–™ç‰©ä»¶åˆ—è¡¨</returns>
         public IEnumerator<KeyValuePair<int, D>> GetEnumerator() {
             return vaults.GetEnumerator();
         }
 
         /// <summary>
-        /// ±µ¤f: Âà´«ªí®æ¸ê®Æ
+        /// æ¥å£: è½‰æ›è¡¨æ ¼è³‡æ–™
         /// </summary>
         private DelegateTranslate delegateTranslate = null;
 
         /// <summary>
-        /// ±µ¤f: ¨ú±o¸ê®Æ¯Á¤Ş
+        /// æ¥å£: å–å¾—è³‡æ–™ç´¢å¼•
         /// </summary>
         private DelegatePkey delegatePkey = null;
 
         /// <summary>
-        /// ªí®æ¸ê®Æ¦Cªí
+        /// è¡¨æ ¼è³‡æ–™åˆ—è¡¨
         /// </summary>
 #if UNITY_STANDALONE
         [ShowInInspector, ReadOnly]

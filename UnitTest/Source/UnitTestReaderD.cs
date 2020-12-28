@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
 namespace UnitTest {
@@ -69,6 +69,23 @@ namespace UnitTest {
             public static int ToPkey(DataD data_) {
                 return data_.pkey;
             }
+        }
+
+        [TestMethod]
+        public void Get() {
+            var reader = new SheetDefine.Reader<Helper.DataT, Helper.DataD>(Helper.ToData, Helper.ToPkey);
+
+            Assert.IsTrue(reader.Set(Helper.GetDataD()));
+
+            var data1 = Helper.GetDataD();
+            var data2 = reader.Get(data1.pkey);
+
+            Assert.IsTrue(data2 != null);
+            Assert.IsTrue(data2.pkey == data1.pkey);
+            Assert.IsTrue(data2.value0 == data1.value0);
+            Assert.IsTrue(data2.value1 == data1.value1);
+            Assert.IsTrue(data2.value2 == data1.value2);
+            Assert.IsTrue(data2.value3 == data1.value3);
         }
 
         [TestMethod]
@@ -146,23 +163,6 @@ namespace UnitTest {
             var reader = new SheetDefine.Reader<Helper.DataT, Helper.DataD>(Helper.ToData, null);
 
             Assert.IsTrue(reader.Set(Helper.GetDataD()) == false);
-        }
-
-        [TestMethod]
-        public void Get() {
-            var reader = new SheetDefine.Reader<Helper.DataT, Helper.DataD>(Helper.ToData, Helper.ToPkey);
-
-            Assert.IsTrue(reader.Set(Helper.GetDataD()));
-
-            var data1 = Helper.GetDataD();
-            var data2 = reader.Get(data1.pkey);
-
-            Assert.IsTrue(data2 != null);
-            Assert.IsTrue(data2.pkey == data1.pkey);
-            Assert.IsTrue(data2.value0 == data1.value0);
-            Assert.IsTrue(data2.value1 == data1.value1);
-            Assert.IsTrue(data2.value2 == data1.value2);
-            Assert.IsTrue(data2.value3 == data1.value3);
         }
 
         [TestMethod]
