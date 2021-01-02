@@ -7,13 +7,11 @@ using Sirenix.OdinInspector;
 #endif
 
 namespace SheetDefine {
-
     /// <summary>
     /// 表格資料讀取器
     /// </summary>
     /// <typeparam name="T">表格資料型態</typeparam>
     public class Reader<T> where T : class {
-
         /// <summary>
         /// 接口: 取得資料索引
         /// </summary>
@@ -120,9 +118,9 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// 取得資料索引與資料物件列表
+        /// 取得尋訪器
         /// </summary>
-        /// <returns>資料索引與資料物件列表</returns>
+        /// <returns>尋訪器</returns>
         public IEnumerator<KeyValuePair<int, T>> GetEnumerator() {
             return vaults.GetEnumerator();
         }
@@ -147,7 +145,6 @@ namespace SheetDefine {
     /// <typeparam name="T">原始表格資料型態</typeparam>
     /// <typeparam name="D">目標表格資料型態</typeparam>
     public class Reader<T, D> where T : class where D : class {
-
         /// <summary>
         /// 接口: 轉換表格資料
         /// </summary>
@@ -291,9 +288,9 @@ namespace SheetDefine {
         }
 
         /// <summary>
-        /// 取得資料索引與資料物件列表
+        /// 取得尋訪器
         /// </summary>
-        /// <returns>資料索引與資料物件列表</returns>
+        /// <returns>尋訪器</returns>
         public IEnumerator<KeyValuePair<int, D>> GetEnumerator() {
             return vaults.GetEnumerator();
         }
