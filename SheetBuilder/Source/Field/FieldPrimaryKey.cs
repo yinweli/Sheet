@@ -28,16 +28,11 @@ namespace Sheet {
             return true;
         }
 
-        public string WriteJsonObject(JsonWriter jsonWriter_, string name_, string value_, long pkeyStart_) {
+        public string WriteJsonObject(JsonWriter jsonWriter_, string name_, string value_) {
             jsonWriter_.WritePropertyName(name_);
 
             try {
-                var pkey = Convert.ToInt64(value_);
-
-                if (UtilityPkey.CheckPkey(pkey) == false)
-                    throw new Exception("pkey too large");
-
-                jsonWriter_.WriteValue(UtilityPkey.NormalizePkey(pkeyStart_, pkey));
+                jsonWriter_.WriteValue(Convert.ToInt64(value_));
 
                 return string.Empty;
             } catch (Exception e) {

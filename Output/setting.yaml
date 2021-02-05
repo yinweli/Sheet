@@ -10,5 +10,4 @@ global:
 elements:
     - excelName: Terrain.xlsx
       sheetName: Data
-      pkeyStart: 1
 ...

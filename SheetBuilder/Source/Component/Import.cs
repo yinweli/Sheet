@@ -61,42 +61,41 @@ namespace Sheet {
                 return OutputError(settingElement_.ToString(), "excel not exist");
 
             try {
-                using (var excelPackage = new ExcelPackage(new FileInfo(filePath))) {
-                    var excelWorkSheet = excelPackage.Workbook.Worksheets[settingElement_.sheetName];
+                using var excelPackage = new ExcelPackage(new FileInfo(filePath));
+                var excelWorkSheet = excelPackage.Workbook.Worksheets[settingElement_.sheetName];
 
-                    if (excelWorkSheet == null)
-                        return OutputError(settingElement_.ToString(), "sheet not exist");
+                if (excelWorkSheet == null)
+                    return OutputError(settingElement_.ToString(), "sheet not exist");
 
-                    if (excelWorkSheet.Dimension.Columns <= 0)
-                        return OutputError(settingElement_.ToString(), "sheet column empty");
+                if (excelWorkSheet.Dimension.Columns <= 0)
+                    return OutputError(settingElement_.ToString(), "sheet column empty");
 
-                    var templateFields = UtilityExcel.GetExcelRows(excelWorkSheet, lineField).Select(itor => Field.Parse(itor)).ToList();
-                    var templateNotes = UtilityExcel.GetExcelRows(excelWorkSheet, lineNote);
+                var templateFields = UtilityExcel.GetExcelRows(excelWorkSheet, lineField).Select(itor => Field.Parse(itor)).ToList();
+                var templateNotes = UtilityExcel.GetExcelRows(excelWorkSheet, lineNote);
 
-                    if (templateFields.Count <= 0)
-                        return OutputError(settingElement_.ToString(), "fields empty");
+                if (templateFields.Count <= 0)
+                    return OutputError(settingElement_.ToString(), "fields empty");
 
-                    if (templateFields.Count != templateNotes.Count)
-                        return OutputError(settingElement_.ToString(), "fields not match notes");
+                if (templateFields.Count != templateNotes.Count)
+                    return OutputError(settingElement_.ToString(), "fields not match notes");
 
-                    if (CheckFields(settingElement_.ToString(), templateFields) == false)
-                        return OutputError(settingElement_.ToString(), "fields error");
+                if (CheckFields(settingElement_.ToString(), templateFields) == false)
+                    return OutputError(settingElement_.ToString(), "fields error");
 
-                    if (templateFields.Where(itor => itor.fieldType.IsPrimaryKey()).Count() <= 0)
-                        return OutputError(settingElement_.ToString(), "primary key not found");
+                if (templateFields.Where(itor => itor.fieldType.IsPrimaryKey()).Count() <= 0)
+                    return OutputError(settingElement_.ToString(), "primary key not found");
 
-                    if (templateFields.Where(itor => itor.fieldType.IsPrimaryKey()).Count() > 1)
-                        return OutputError(settingElement_.ToString(), "too many primary key");
+                if (templateFields.Where(itor => itor.fieldType.IsPrimaryKey()).Count() > 1)
+                    return OutputError(settingElement_.ToString(), "too many primary key");
 
-                    for (var i = 0; i < templateFields.Count; ++i)
-                        templateFields[i].note = templateNotes[i];
+                for (var i = 0; i < templateFields.Count; ++i)
+                    templateFields[i].note = templateNotes[i];
 
-                    fields = templateFields;
-                    datas = Enumerable.Range(lineData, Math.Max(UtilityExcel.GetExcelRowCount(excelWorkSheet) - lineField, 0))
-                        .Select(itor => UtilityExcel.GetExcelRows(excelWorkSheet, itor, GetFields().Count)).ToList();
+                fields = templateFields;
+                datas = Enumerable.Range(lineData, Math.Max(UtilityExcel.GetExcelRowCount(excelWorkSheet) - lineField, 0))
+                    .Select(itor => UtilityExcel.GetExcelRows(excelWorkSheet, itor, GetFields().Count)).ToList();
 
-                    return true;
-                }//using
+                return true;
             } catch (Exception e) {
                 return OutputError(settingElement_.ToString(), "open excel file failed, " + e.ToString());
             }

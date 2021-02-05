@@ -1,4 +1,4 @@
-﻿// generation time=2020-11-03 16:32:40
+﻿// generation time=2021-02-05 13:04:02
 
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,6 @@ using System.Collections.Generic;
 namespace SheetDefine {
     public class TerrainData {
         public const string filename = "TerrainData.json";
-        public const int pkeyStart = 100000;
         public int terrainId; // 地形編號
         public bool isLand; // 是否是陸地
         public int terrainType; // 地形型態

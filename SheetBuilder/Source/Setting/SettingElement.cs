@@ -18,12 +18,6 @@ namespace Sheet {
             if (sheetName == string.Empty)
                 return Output.Error("setting element", "sheet name empty");
 
-            if (pkeyStart <= 0)
-                return Output.Error("setting element", "pkey start too small");
-
-            if (UtilityPkey.CheckPkeyStart(pkeyStart) == false)
-                return Output.Error("setting element", "pkey start too large");
-
             return true;
         }
 
@@ -48,10 +42,5 @@ namespace Sheet {
         /// Excel表單名稱
         /// </summary>
         public string sheetName = string.Empty;
-
-        /// <summary>
-        /// 主要索引起始編號
-        /// </summary>
-        public long pkeyStart = 0;
     }
 }

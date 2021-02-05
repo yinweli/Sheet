@@ -43,9 +43,8 @@ namespace Sheet {
         /// <param name="jsonWriter_">JsonWriter物件</param>
         /// <param name="name_">欄位名稱</param>
         /// <param name="value_">欄位字串</param>
-        /// <param name="pkeyStart_">主要索引起始編號</param>
         /// <returns>如果是空字串表示成功, 否則是錯誤訊息</returns>
-        string WriteJsonObject(JsonWriter jsonWriter_, string name_, string value_, long pkeyStart_);
+        string WriteJsonObject(JsonWriter jsonWriter_, string name_, string value_);
     }
 
     /// <summary>
