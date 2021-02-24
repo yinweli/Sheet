@@ -1,4 +1,4 @@
-﻿// generation time=2021-02-05 13:04:02
+﻿// generation by sheetBuilder ^o<
 // use nlohmann's json library
 // github: https://github.com/nlohmann/json
 

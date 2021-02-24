@@ -23,15 +23,15 @@ namespace Sheet {
         /// 程式碼樣板
         /// </summary>
         public const string codeTemplate =
-    @"// generation time={0:yyyy-MM-dd HH:mm:ss}
+    @"// generation by sheetBuilder ^o<
 
 using System;
 using System.Collections.Generic;
 
 namespace SheetDefine {{
-    public class {1} {{
+    public class {0} {{
+{1}
 {2}
-{3}
     }}
 }}";
 
@@ -65,7 +65,6 @@ namespace SheetDefine {{
 
             var context = string.Format(
                 codeTemplate,
-                DateTime.Now,
                 elementName,
                 string.Format(filenameTemplate, elementName + jsonExtension),
                 string.Join(Environment.NewLine, fields));

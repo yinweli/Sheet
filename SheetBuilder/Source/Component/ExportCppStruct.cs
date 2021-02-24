@@ -28,7 +28,7 @@ namespace Sheet {
         /// 程式碼樣板
         /// </summary>
         public const string codeTemplate =
-    @"// generation time={0:yyyy-MM-dd HH:mm:ss}
+    @"// generation by sheetBuilder ^o<
 // use nlohmann's json library
 // github: https://github.com/nlohmann/json
 
@@ -38,7 +38,7 @@ namespace Sheet {
 #include <string>
 #include <vector>
 
-#include ""{1}""
+#include ""{0}""
 
 namespace SheetDefine {{
 using nlohmann::json;
@@ -48,12 +48,12 @@ using nlohmann::json;
 using pkey = int32_t;
 #endif // !PKEY
 
-struct {2} {{
-{3}
+struct {1} {{
+{2}
 
     static std::string get_filename()
     {{
-        return ""{4}"";
+        return ""{3}"";
     }}
 }};
 
@@ -64,15 +64,15 @@ inline json get_untyped(const json& j, const char* property)
 }} // namespace Sheet
 
 namespace nlohmann {{
-inline void from_json(const json& _j, struct Sheet::{2}& _x)
+inline void from_json(const json& _j, struct Sheet::{1}& _x)
 {{
-{5}
+{4}
 }}
 
-inline void to_json(json& _j, const struct Sheet::{2}& _x)
+inline void to_json(json& _j, const struct Sheet::{1}& _x)
 {{
     _j = json::object();
-{6}
+{5}
 }}
 }} // namespace nlohmann";
 
@@ -127,7 +127,6 @@ inline void to_json(json& _j, const struct Sheet::{2}& _x)
 
             var context = string.Format(
                 codeTemplate,
-                DateTime.Now,
                 libraryPath,
                 elementName,
                 string.Join(Environment.NewLine, templateField),
