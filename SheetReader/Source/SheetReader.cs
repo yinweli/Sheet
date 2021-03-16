@@ -65,9 +65,9 @@ namespace SheetDefine {
         public bool Set(string json_) {
             try {
                 return Set(JsonConvert.DeserializeObject<T>(json_));
-            } catch (Exception e) {
+            } catch (Exception e_) {
 #if UNITY_STANDALONE
-                Debug.Log(e);
+                Debug.Log(e_);
 #endif
                 return false;
             }//try
@@ -87,9 +87,9 @@ namespace SheetDefine {
 
             try {
                 vaults[delegatePkey(data_)] = data_;
-            } catch (Exception e) {
+            } catch (Exception e_) {
 #if UNITY_STANDALONE
-                Debug.Log(e);
+                Debug.Log(e_);
 #endif
                 return false;
             }//try
@@ -202,9 +202,9 @@ namespace SheetDefine {
         public bool Set(string json_) {
             try {
                 return Set(JsonConvert.DeserializeObject<T>(json_));
-            } catch (Exception e) {
+            } catch (Exception e_) {
 #if UNITY_STANDALONE
-                Debug.Log(e);
+                Debug.Log(e_);
 #endif
                 return false;
             }//try
@@ -230,9 +230,9 @@ namespace SheetDefine {
                 var pkey = delegatePkey(data);
 
                 vaults[pkey] = data;
-            } catch (Exception e) {
+            } catch (Exception e_) {
 #if UNITY_STANDALONE
-                Debug.Log(e);
+                Debug.Log(e_);
 #endif
                 return false;
             }//try
@@ -256,9 +256,9 @@ namespace SheetDefine {
                 var pkey = delegatePkey(data_);
 
                 vaults[pkey] = data_;
-            } catch (Exception e) {
+            } catch (Exception e_) {
 #if UNITY_STANDALONE
-                Debug.Log(e);
+                Debug.Log(e_);
 #endif
                 return false;
             }//try
