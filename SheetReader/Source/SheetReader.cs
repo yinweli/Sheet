@@ -3,15 +3,20 @@ using System;
 using System.Collections.Generic;
 
 #if UNITY_STANDALONE
+
+using UnityEngine;
 using Sirenix.OdinInspector;
+
 #endif
 
 namespace SheetDefine {
+
     /// <summary>
     /// 表格資料讀取器
     /// </summary>
     /// <typeparam name="T">表格資料型態</typeparam>
     public class Reader<T> where T : class {
+
         /// <summary>
         /// 接口: 取得資料索引
         /// </summary>
@@ -60,7 +65,10 @@ namespace SheetDefine {
         public bool Set(string json_) {
             try {
                 return Set(JsonConvert.DeserializeObject<T>(json_));
-            } catch (Exception) {
+            } catch (Exception e) {
+#if UNITY_STANDALONE
+                Debug.Log(e);
+#endif
                 return false;
             }//try
         }
@@ -79,7 +87,10 @@ namespace SheetDefine {
 
             try {
                 vaults[delegatePkey(data_)] = data_;
-            } catch (Exception) {
+            } catch (Exception e) {
+#if UNITY_STANDALONE
+                Debug.Log(e);
+#endif
                 return false;
             }//try
 
@@ -134,6 +145,7 @@ namespace SheetDefine {
         /// 表格資料列表
         /// </summary>
 #if UNITY_STANDALONE
+
         [ShowInInspector, ReadOnly]
 #endif
         private Dictionary<int, T> vaults = new Dictionary<int, T>();
@@ -145,6 +157,7 @@ namespace SheetDefine {
     /// <typeparam name="T">原始表格資料型態</typeparam>
     /// <typeparam name="D">目標表格資料型態</typeparam>
     public class Reader<T, D> where T : class where D : class {
+
         /// <summary>
         /// 接口: 轉換表格資料
         /// </summary>
@@ -189,7 +202,10 @@ namespace SheetDefine {
         public bool Set(string json_) {
             try {
                 return Set(JsonConvert.DeserializeObject<T>(json_));
-            } catch (Exception) {
+            } catch (Exception e) {
+#if UNITY_STANDALONE
+                Debug.Log(e);
+#endif
                 return false;
             }//try
         }
@@ -214,7 +230,10 @@ namespace SheetDefine {
                 var pkey = delegatePkey(data);
 
                 vaults[pkey] = data;
-            } catch (Exception) {
+            } catch (Exception e) {
+#if UNITY_STANDALONE
+                Debug.Log(e);
+#endif
                 return false;
             }//try
 
@@ -237,7 +256,10 @@ namespace SheetDefine {
                 var pkey = delegatePkey(data_);
 
                 vaults[pkey] = data_;
-            } catch (Exception) {
+            } catch (Exception e) {
+#if UNITY_STANDALONE
+                Debug.Log(e);
+#endif
                 return false;
             }//try
 
@@ -309,6 +331,7 @@ namespace SheetDefine {
         /// 表格資料列表
         /// </summary>
 #if UNITY_STANDALONE
+
         [ShowInInspector, ReadOnly]
 #endif
         private Dictionary<int, D> vaults = new Dictionary<int, D>();
