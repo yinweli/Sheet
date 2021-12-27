@@ -11,6 +11,7 @@ namespace SheetDefine {
         public int terrainType; // 地形型態
         public string icon; // 圖示名稱
         public string sprite; // 圖形名稱
+        public List<int> testInt; // 測試字串(int)
         public List<double> testDouble; // 測試字串(real)
         public List<string> testText; // 測試字串(text)
     }

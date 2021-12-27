@@ -21,7 +21,7 @@ namespace Sheet {
         /// <param name="fieldString_">欄位字串</param>
         /// <returns>欄位字串陣列</returns>
         public static string[] SplitFieldString(string fieldString_) {
-            return fieldString_.Split(fieldSeparator.ToCharArray());
+            return fieldString_.Split(fieldSeparator.ToCharArray(), System.StringSplitOptions.RemoveEmptyEntries);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Sheet {
         /// <param name="arrayString_">陣列字串</param>
         /// <returns>陣列字串陣列</returns>
         public static string[] SplitArrayString(string arrayString_) {
-            return arrayString_.Split(arraySeparator.ToCharArray());
+            return arrayString_.Split(arraySeparator.ToCharArray(), System.StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }
