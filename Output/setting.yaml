@@ -6,6 +6,9 @@ global:
     outputPathCpp: SheetCpp
     cppLibraryPath: nlohmann
     bom: true
+    lineOfNote: 1
+    lineOfField: 2
+    lineOfData: 3
     
 elements:
     - excelName: Terrain.xlsx

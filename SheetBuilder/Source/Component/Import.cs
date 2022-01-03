@@ -18,21 +18,6 @@ namespace Sheet {
         public const string errorSuffix = " @import";
 
         /// <summary>
-        /// 註解行號, 所以不需要處理
-        /// </summary>
-        public const int lineNote = 1;
-
-        /// <summary>
-        /// 欄位行號
-        /// </summary>
-        public const int lineField = 2;
-
-        /// <summary>
-        /// 資料起始行號
-        /// </summary>
-        public const int lineData = 3;
-
-        /// <summary>
         /// 取得欄位列表
         /// </summary>
         /// <returns>欄位列表</returns>
@@ -70,8 +55,8 @@ namespace Sheet {
                 if (excelWorkSheet.Dimension.Columns <= 0)
                     return OutputError(settingElement_.ToString(), "sheet column empty");
 
-                var templateFields = UtilityExcel.GetExcelRows(excelWorkSheet, lineField).Select(itor => Field.Parse(itor)).ToList();
-                var templateNotes = UtilityExcel.GetExcelRows(excelWorkSheet, lineNote);
+                var templateFields = UtilityExcel.GetExcelRows(excelWorkSheet, settingGlobal_.lineOfField).Select(itor_ => Field.Parse(itor_)).ToList();
+                var templateNotes = UtilityExcel.GetExcelRows(excelWorkSheet, settingGlobal_.lineOfNote);
 
                 if (templateFields.Count <= 0)
                     return OutputError(settingElement_.ToString(), "fields empty");
@@ -82,18 +67,19 @@ namespace Sheet {
                 if (CheckFields(settingElement_.ToString(), templateFields) == false)
                     return OutputError(settingElement_.ToString(), "fields error");
 
-                if (templateFields.Where(itor => itor.fieldType.IsPrimaryKey()).Count() <= 0)
+                if (templateFields.Where(itor_ => itor_.fieldType.IsPrimaryKey()).Count() <= 0)
                     return OutputError(settingElement_.ToString(), "primary key not found");
 
-                if (templateFields.Where(itor => itor.fieldType.IsPrimaryKey()).Count() > 1)
+                if (templateFields.Where(itor_ => itor_.fieldType.IsPrimaryKey()).Count() > 1)
                     return OutputError(settingElement_.ToString(), "too many primary key");
 
                 for (var i = 0; i < templateFields.Count; ++i)
                     templateFields[i].note = templateNotes[i];
 
                 fields = templateFields;
-                datas = Enumerable.Range(lineData, Math.Max(UtilityExcel.GetExcelRowCount(excelWorkSheet) - lineField, 0))
-                    .Select(itor => UtilityExcel.GetExcelRows(excelWorkSheet, itor, GetFields().Count)).ToList();
+                datas = Enumerable
+                    .Range(settingGlobal_.lineOfData, Math.Max(UtilityExcel.GetExcelRowCount(excelWorkSheet) - settingGlobal_.lineOfData + 1, 0))
+                    .Select(itor_ => UtilityExcel.GetExcelRows(excelWorkSheet, itor_, GetFields().Count)).ToList();
 
                 return true;
             } catch (Exception e) {
@@ -121,9 +107,9 @@ namespace Sheet {
         /// <param name="fields_">欄位列表</param>
         /// <returns>true表示成功, false則否</returns>
         private bool CheckFields(string title_, List<Field> fields_) {
-            var errorFields = fields_.Where(itor => itor.fieldType == null).ToList();
+            var errorFields = fields_.Where(itor_ => itor_.fieldType == null).ToList();
 
-            errorFields.ForEach(itor => OutputError(title_, "fields type null, field=" + itor.meta));
+            errorFields.ForEach(itor_ => OutputError(title_, "fields type null, field=" + itor_.meta));
 
             return errorFields.Count <= 0;
         }

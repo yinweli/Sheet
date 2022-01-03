@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheetBuilder", "SheetBuilde
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{7C933AFC-978F-4A20-9418-46A43A91B67D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetReader", "SheetReader\SheetReader.csproj", "{83082C79-585B-4507-80E1-8066FE5D536C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheetReader", "SheetReader\SheetReader.csproj", "{83082C79-585B-4507-80E1-8066FE5D536C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{317CAB86-AF0E-4FF5-8D82-FD13BFD904CA}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

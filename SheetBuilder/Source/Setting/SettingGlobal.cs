@@ -37,6 +37,12 @@ namespace Sheet {
             if (cppLibraryPath == null)
                 cppLibraryPath = string.Empty;
 
+            if (lineOfNote >= lineOfData)
+                return Output.Error("setting global", "line of note can't greater than line of data");
+
+            if (lineOfField >= lineOfData)
+                return Output.Error("setting global", "line of field can't greater than line of data");
+
             return true;
         }
 
@@ -69,5 +75,20 @@ namespace Sheet {
         /// 輸出的檔案是否使用順序標記(BOM)
         /// </summary>
         public bool bom = false;
+
+        /// <summary>
+        /// 註解行號
+        /// </summary>
+        public int lineOfNote = 1;
+
+        /// <summary>
+        /// 欄位行號
+        /// </summary>
+        public int lineOfField = 2;
+
+        /// <summary>
+        /// 資料起始行號
+        /// </summary>
+        public int lineOfData = 3;
     }
 }
