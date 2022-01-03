@@ -78,7 +78,7 @@ namespace Sheet {
 
                 fields = templateFields;
                 datas = Enumerable
-                    .Range(settingGlobal_.lineOfData, Math.Max(UtilityExcel.GetExcelRowCount(excelWorkSheet) - settingGlobal_.lineOfData + 1, 0))
+                    .Range(settingGlobal_.lineOfData, UtilityExcel.GetExcelRowCount(excelWorkSheet, settingGlobal_.lineOfData))
                     .Select(itor_ => UtilityExcel.GetExcelRows(excelWorkSheet, itor_, GetFields().Count)).ToList();
 
                 return true;

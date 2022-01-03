@@ -12,16 +12,19 @@ namespace Sheet {
         /// 取得Execel表單中行數
         /// </summary>
         /// <param name="excelWorkSheet_">Excel表單</param>
+        /// <param name="row_">起始行號, 從1起算</param>
         /// <returns>行數</returns>
-        public static int GetExcelRowCount(ExcelWorksheet excelWorkSheet_) {
-            for (int i = 1; i <= excelWorkSheet_.Dimension.End.Row; ++i) {
+        public static int GetExcelRowCount(ExcelWorksheet excelWorkSheet_, int row_) {
+            var count = 0;
+
+            for (int i = row_; i <= excelWorkSheet_.Dimension.End.Row; ++i, ++count) {
                 var cell = excelWorkSheet_.Cells[i, 1];
 
                 if (cell == null || cell.Value == null || cell.Value.ToString().Length <= 0)
-                    return i - 1;
+                    break;
             }//for
 
-            return excelWorkSheet_.Dimension.End.Row;
+            return count;
         }
 
         /// <summary>
