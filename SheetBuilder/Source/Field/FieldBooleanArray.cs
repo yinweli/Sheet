@@ -4,7 +4,7 @@ using System;
 namespace Sheet {
 
     /// <summary>
-    /// 浮點數陣列欄位
+    /// 布林值陣列欄位
     /// </summary>
     public class FieldBooleanArray : IFieldType {
 
@@ -36,7 +36,7 @@ namespace Sheet {
 
             try {
                 foreach (string itor in UtilityString.SplitArrayString(value_))
-                    jsonWriter_.WriteValue(Convert.ToBoolean(itor));
+                    jsonWriter_.WriteValue(UtilityString.StringToBoolean(itor));
             } catch (Exception e) {
                 result = e.Message;
             }

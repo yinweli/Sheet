@@ -4,7 +4,7 @@ using System;
 namespace Sheet {
 
     /// <summary>
-    /// 浮點數欄位
+    /// 布林值欄位
     /// </summary>
     public class FieldBoolean : IFieldType {
 
@@ -32,7 +32,7 @@ namespace Sheet {
             jsonWriter_.WritePropertyName(name_);
 
             try {
-                jsonWriter_.WriteValue(Convert.ToBoolean(value_));
+                jsonWriter_.WriteValue(UtilityString.StringToBoolean(value_));
 
                 return string.Empty;
             } catch (Exception e) {

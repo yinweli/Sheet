@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "SheetBuilder/1.0.5": {
+      "SheetBuilder/1.0.6": {
         "dependencies": {
           "EPPlus": "4.5.3.3",
           "Newtonsoft.Json": "13.0.1",
@@ -721,7 +721,7 @@
     }
   },
   "libraries": {
-    "SheetBuilder/1.0.5": {
+    "SheetBuilder/1.0.6": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

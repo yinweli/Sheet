@@ -1,3 +1,5 @@
+using System;
+
 namespace Sheet {
 
     /// <summary>
@@ -31,6 +33,18 @@ namespace Sheet {
         /// <returns>陣列字串陣列</returns>
         public static string[] SplitArrayString(string arrayString_) {
             return arrayString_.Split(arraySeparator.ToCharArray(), System.StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        /// <summary>
+        /// 字串轉換為布林值
+        /// </summary>
+        /// <param name="string_">字串</param>
+        /// <returns>布林值</returns>
+        public static bool StringToBoolean(string string_) {
+            if (int.TryParse(string_, out var value))
+                return Convert.ToBoolean(value);
+            else
+                return Convert.ToBoolean(string_);
         }
     }
 }
